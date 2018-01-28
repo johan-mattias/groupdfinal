@@ -27,7 +27,7 @@ export default class App extends Component<{}> {
         Alert.alert('Button pressed')
     }
 
-    getMovies() {
+    getJSON() {
         return fetch('http://localhost:3000/employees')
 
             .then((response) => response.json())
@@ -54,7 +54,7 @@ export default class App extends Component<{}> {
         </Text>
         <View style = {styles.buttonContainer}>
             <Button
-                onPress = {this.getMovies}
+                onPress = {this.getJSON}
                 title="Test networking"
                 color = 'blue'
             />
