@@ -34,7 +34,7 @@ export default class App extends Component<{}> {
             .then((responseJson) => {
               AlertIOS.alert(
                   'GET Response',
-                  'Search query -> ' + responseJson
+                  'Search query -> ' + JSON.stringify(responseJson)
               )
             })
 
