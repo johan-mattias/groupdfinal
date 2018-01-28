@@ -9,7 +9,9 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Button,
+  AlertIOS
 } from 'react-native';
 
 const instructions = Platform.select({
@@ -20,7 +22,28 @@ const instructions = Platform.select({
 });
 
 export default class App extends Component<{}> {
-  render() {
+
+    buttonPressed() {
+        Alert.alert('Button pressed')
+    }
+
+    getMovies() {
+        return fetch('http://localhost:3000/employees')
+
+            .then((response) => response.json())
+            .then((responseJson) => {
+              AlertIOS.alert(
+                  'GET Response',
+                  'Search query -> ' + responseJson
+              )
+            })
+
+            .catch((error) => {
+              console.error(error);
+            });
+    }
+
+    render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -29,12 +52,20 @@ export default class App extends Component<{}> {
         <Text style={styles.instructions}>
           To get started, edit App.js
         </Text>
+        <View style = {styles.buttonContainer}>
+            <Button
+                onPress = {this.getMovies}
+                title="Test networking"
+                color = 'blue'
+            />
+        </View>
+
         <Text style={styles.instructions}>
           {instructions}
         </Text>
       </View>
     );
-  }
+    }
 }
 
 const styles = StyleSheet.create({
@@ -54,4 +85,12 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  buttonContainer: {
+    margin: 20
+  },
+  alternativeLayoutButtonContainer: {
+    margin: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  }
 });
