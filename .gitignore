@@ -6,9 +6,8 @@ __pycache__/
 # C extensions
 *.so
 
-
-# Non programming folders
-Exams/ 
+# npm
+node_modules/
 
 # Distribution / packaging
 .Python
