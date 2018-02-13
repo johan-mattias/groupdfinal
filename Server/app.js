@@ -9,9 +9,23 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// Routes
 var index = require('./routes/index');
 var users = require('./routes/users');
 var test = require('./routes/test');
+var stream = require('./routes/stream');
+var db = require('./db');
+
+//SSL cert and https
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+var privateKey  = fs.readFileSync('sslcert/beerdex.key', 'utf8');
+var certificate = fs.readFileSync('sslcert/beerdex.crt', 'utf8');
+
+var credentials = {key: privateKey, cert: certificate};
+
+
 
 var app = express();
 
@@ -49,23 +63,14 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-//Database connection
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'beeradmin',
-  password : 'GemenbEer0215',
-  database : 'beerdex'
-});
 
-connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
 
-  console.log('connected as id ' + connection.threadId);
-});
 
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
+
+httpServer.listen(8080);
+httpsServer.listen(8443);
 
 
 module.exports = app;
