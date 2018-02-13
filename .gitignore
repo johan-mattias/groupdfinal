@@ -9,6 +9,11 @@ __pycache__/
 # npm
 node_modules/
 
+# SSL cert
+*.crt
+*.csr
+*.key
+*.key.org
 # Distribution / packaging
 .Python
 env/
