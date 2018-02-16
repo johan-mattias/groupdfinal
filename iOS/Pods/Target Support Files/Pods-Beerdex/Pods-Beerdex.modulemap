@@ -1,0 +1,6 @@
+framework module Pods_Beerdex {
+  umbrella header "Pods-Beerdex-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:/Users/zohrath/Coding/Platform/Platform-spanning/iOS/Beerdex/Beerdex/BeerCell.swift">
+   </FileRef>
+   <FileRef
+      location = "group:Beerdex/Beerdex.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>

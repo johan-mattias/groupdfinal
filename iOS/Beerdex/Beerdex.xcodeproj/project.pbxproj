@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB13001C2035F4F800ECA29D /* BeerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB13001B2035F4F800ECA29D /* BeerCell.swift */; };
+		AB13001E2035F52900ECA29D /* BeerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB13001D2035F52900ECA29D /* BeerCollectionViewController.swift */; };
+		AB226AEA2031BE830012BFE6 /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB226AE92031BE830012BFE6 /* Beer.swift */; };
 		AB6469C12031B94D001862E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6469C02031B94D001862E8 /* AppDelegate.swift */; };
-		AB6469C32031B94D001862E8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6469C22031B94D001862E8 /* ViewController.swift */; };
 		AB6469C62031B94D001862E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB6469C42031B94D001862E8 /* Main.storyboard */; };
 		AB6469C92031B94D001862E8 /* Beerdex.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AB6469C72031B94D001862E8 /* Beerdex.xcdatamodeld */; };
 		AB6469CB2031B94D001862E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB6469CA2031B94D001862E8 /* Assets.xcassets */; };
 		AB6469CE2031B94D001862E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB6469CC2031B94D001862E8 /* LaunchScreen.storyboard */; };
 		AB6469D92031B94E001862E8 /* BeerdexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6469D82031B94E001862E8 /* BeerdexTests.swift */; };
+		D18D9DBAEAACEA60E3851E53 /* Pods_Beerdex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC4770CE3C19825E27C92E5 /* Pods_Beerdex.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,9 +30,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3BC4770CE3C19825E27C92E5 /* Pods_Beerdex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Beerdex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C655A0D205FBE2F1DBFA536 /* Pods-Beerdex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beerdex.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-Beerdex/Pods-Beerdex.debug.xcconfig"; sourceTree = "<group>"; };
+		65AD3344EA80D3E252A88DDB /* Pods-Beerdex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Beerdex.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Beerdex/Pods-Beerdex.release.xcconfig"; sourceTree = "<group>"; };
+		AB13001B2035F4F800ECA29D /* BeerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerCell.swift; sourceTree = "<group>"; };
+		AB13001D2035F52900ECA29D /* BeerCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerCollectionViewController.swift; sourceTree = "<group>"; };
+		AB226AE92031BE830012BFE6 /* Beer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beer.swift; sourceTree = "<group>"; };
 		AB6469BD2031B94D001862E8 /* Beerdex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beerdex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB6469C02031B94D001862E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AB6469C22031B94D001862E8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AB6469C52031B94D001862E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AB6469C82031B94D001862E8 /* Beerdex.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Beerdex.xcdatamodel; sourceTree = "<group>"; };
 		AB6469CA2031B94D001862E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -45,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D18D9DBAEAACEA60E3851E53 /* Pods_Beerdex.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,12 +67,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D703F185A21E2ABC9AE917A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4C655A0D205FBE2F1DBFA536 /* Pods-Beerdex.debug.xcconfig */,
+				65AD3344EA80D3E252A88DDB /* Pods-Beerdex.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A34B6B70C8A1F64269627FDA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3BC4770CE3C19825E27C92E5 /* Pods_Beerdex.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AB6469B42031B94D001862E8 = {
 			isa = PBXGroup;
 			children = (
 				AB6469BF2031B94D001862E8 /* Beerdex */,
 				AB6469D72031B94E001862E8 /* BeerdexTests */,
 				AB6469BE2031B94D001862E8 /* Products */,
+				3D703F185A21E2ABC9AE917A /* Pods */,
+				A34B6B70C8A1F64269627FDA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,8 +108,10 @@
 			isa = PBXGroup;
 			children = (
 				AB6469C02031B94D001862E8 /* AppDelegate.swift */,
-				AB6469C22031B94D001862E8 /* ViewController.swift */,
 				AB6469C42031B94D001862E8 /* Main.storyboard */,
+				AB13001D2035F52900ECA29D /* BeerCollectionViewController.swift */,
+				AB13001B2035F4F800ECA29D /* BeerCell.swift */,
+				AB226AE92031BE830012BFE6 /* Beer.swift */,
 				AB6469CA2031B94D001862E8 /* Assets.xcassets */,
 				AB6469CC2031B94D001862E8 /* LaunchScreen.storyboard */,
 				AB6469CF2031B94D001862E8 /* Info.plist */,
@@ -106,9 +136,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB6469DD2031B94E001862E8 /* Build configuration list for PBXNativeTarget "Beerdex" */;
 			buildPhases = (
+				DBFB0D7E85A9B505C7309D96 /* [CP] Check Pods Manifest.lock */,
 				AB6469B92031B94D001862E8 /* Sources */,
 				AB6469BA2031B94D001862E8 /* Frameworks */,
 				AB6469BB2031B94D001862E8 /* Resources */,
+				2000171A3B1B251FCAEB8593 /* [CP] Embed Pods Frameworks */,
+				B29AB6926CB5DDD7667F5B7D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -197,14 +230,70 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2000171A3B1B251FCAEB8593 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/../Pods/Target Support Files/Pods-Beerdex/Pods-Beerdex-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-Beerdex/Pods-Beerdex-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B29AB6926CB5DDD7667F5B7D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-Beerdex/Pods-Beerdex-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DBFB0D7E85A9B505C7309D96 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Beerdex-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AB6469B92031B94D001862E8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB13001E2035F52900ECA29D /* BeerCollectionViewController.swift in Sources */,
+				AB13001C2035F4F800ECA29D /* BeerCell.swift in Sources */,
 				AB6469C92031B94D001862E8 /* Beerdex.xcdatamodeld in Sources */,
-				AB6469C32031B94D001862E8 /* ViewController.swift in Sources */,
 				AB6469C12031B94D001862E8 /* AppDelegate.swift in Sources */,
+				AB226AEA2031BE830012BFE6 /* Beer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +444,7 @@
 		};
 		AB6469DE2031B94E001862E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C655A0D205FBE2F1DBFA536 /* Pods-Beerdex.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -370,6 +460,7 @@
 		};
 		AB6469DF2031B94E001862E8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 65AD3344EA80D3E252A88DDB /* Pods-Beerdex.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
