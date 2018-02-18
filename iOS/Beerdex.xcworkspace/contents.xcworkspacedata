@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/zohrath/Coding/Platform/Platform-spanning/iOS/Beerdex/Beerdex/BeerCell.swift">
-   </FileRef>
-   <FileRef
       location = "group:Beerdex/Beerdex.xcodeproj">
    </FileRef>
    <FileRef
