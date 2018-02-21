@@ -6,4 +6,5 @@ use_frameworks!
 project '/Users/zohrath/Coding/Platform/Platform-spanning/iOS/Beerdex/Beerdex.xcodeproj'
 target 'Beerdex' do
     pod 'Alamofire'
+    
 end 

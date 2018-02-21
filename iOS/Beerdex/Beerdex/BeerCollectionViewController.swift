@@ -8,21 +8,22 @@
 
 import UIKit
 
+
 private let reuseIdentifier = "BeerCell"
 
 class BeerCollectionViewController: UICollectionViewController {
     
-    var testBeer: [Beer]? {
+    var beersArray: [Beer]? {
         didSet {
-            guard let beer = testBeer else { return }
-            for x in beer {
-                print (x.title)
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
             }
         }
     }
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         getDataFromServer()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -32,7 +33,7 @@ class BeerCollectionViewController: UICollectionViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     //MARK: - Data
     
     func getDataFromServer() {
@@ -44,24 +45,24 @@ class BeerCollectionViewController: UICollectionViewController {
             do {
                 let beer = try
                     JSONDecoder().decode([Beer].self, from: data)
-                    self.testBeer = beer
+                    self.beersArray = beer
             } catch let jsonerr {
                 print("Error", jsonerr)
             }
         }
     }
     
+    
+    
     func downloadData(completionHandler: @escaping (Data?) -> () ) {
         
-        let todoEndpoint: String = "https://jsonplaceholder.typicode.com/posts"
+//        let todoEndpoint: String = "https://jsonplaceholder.typicode.com/posts"
+        let todoEndpoint = "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json"
         guard let url = URL(string: todoEndpoint) else { return }
         let urlRequest = URLRequest(url: url)
-        let session = URLSession.shared
         
-        let task = session.dataTask(with: urlRequest) { (data, response, error) in
-            if let response = response {
-                print(response)
-            }
+        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+
             if let error = error {
                 print(error)
             }
@@ -89,15 +90,14 @@ class BeerCollectionViewController: UICollectionViewController {
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 5
+        return beersArray?.count ?? 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BeerCell
-    
-        // Configure the cell
-        cell.setup()
+        
+        cell.beer = beersArray?[indexPath.item]
+        cell.configure()
         return cell
     }
 
