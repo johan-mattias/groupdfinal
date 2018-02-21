@@ -3,48 +3,53 @@ var db = require('../db');
 
 var users = "Create table users (" +
     "id int auto_increment primary key," +
-    "Name varchar(100)" +
-")"
+    "Name varchar(100) not null" +
+    ")"
 
 var countries ="Create table countries("+
     "id int auto_increment primary key,"+
-    "Name varchar(100)"+
-")"
+    "Name varchar(100),"+
+    "Unique (Name)"+
+    ")"
 
 var beerTypes ="Create table beerTypes("+
     "id int auto_increment primary key,"+
-   "Name varchar(100)"+
-")"
+    "Name varchar(100),"+
+    "Unique (Name)"+
+    ")"
 
 var breweries = "Create table breweries ("+
     "id  int auto_increment primary key,"+
-    "Name varchar(100)"+
-")"
+    "Name varchar(100),"+
+    "Unique (Name)"+
+    ")"
 
 var beers = "Create table beers ("+
     "id  int auto_increment primary key,"+
-    "Name varchar(100),"+
-    "beertypeID int,"+
-    "breweryID int,"+
-    "countryID int,"+
+    "Name varchar(100) not null,"+
+    "beerTypeID int not null,"+
+    "breweryID int not null,"+
+    "countryID int not null,"+
     "FOREIGN KEY (beertypeID) REFERENCES beerTypes(id),"+
     "FOREIGN KEY (breweryID) REFERENCES breweries(id),"+
-    "FOREIGN KEY (countryID) REFERENCES countries(id)"+
-")"
+    "FOREIGN KEY (countryID) REFERENCES countries(id),"+
+    "Unique (Name,beerTypeID,BreweryID,CountryID)"+
+    ")"
 
 var images = "Create table images ("+
     "id int auto_increment primary key,"+
     "link varchar(100),"+
-    "userID int,"+
-    "beerID int,"+
+    "userID int not null,"+
+    "beerID int not null,"+
     "FOREIGN KEY (userID) REFERENCES users(id),"+
-    "FOREIGN KEY (beerID) REFERENCES beers(id)"+
-")"
+    "FOREIGN KEY (beerID) REFERENCES beers(id),"+
+    "Unique (link)"+
+    ")"
 
 var comments = "Create table comments ("+
     "id int auto_increment primary key,"+
-    "userID int,"+
-    "imageID int,"+
+    "userID int not null,"+
+    "imageID int not null,"+
     "FOREIGN KEY (userID) REFERENCES users(id),"+
     "FOREIGN KEY (imageID) REFERENCES images(id),"+
     "comment varchar(400)"+
