@@ -27,9 +27,9 @@ var beers = "Create table beers ("+
     "beertypeID int,"+
     "breweryID int,"+
     "countryID int,"+
-    "FOREIGN KEY (beertype) REFERENCES beerTypes(id),"+
-    "FOREIGN KEY (brewery) REFERENCES breweries(id),"+
-    "FOREIGN KEY (country) REFERENCES countries(id)"+
+    "FOREIGN KEY (beertypeID) REFERENCES beerTypes(id),"+
+    "FOREIGN KEY (breweryID) REFERENCES breweries(id),"+
+    "FOREIGN KEY (countryID) REFERENCES countries(id)"+
 ")"
 
 var images = "Create table images ("+
@@ -45,8 +45,8 @@ var comments = "Create table comments ("+
     "id int auto_increment primary key,"+
     "userID int,"+
     "imageID int,"+
-    "FOREIGN KEY (user) REFERENCES users(id),"+
-    "FOREIGN KEY (image) REFERENCES images(id),"+
+    "FOREIGN KEY (userID) REFERENCES users(id),"+
+    "FOREIGN KEY (imageID) REFERENCES images(id),"+
     "comment varchar(400)"+
 ")"
 
@@ -79,4 +79,5 @@ var comments = "Create table comments ("+
     db.query(comments, function (err, result) {
         if (err) throw err;
         console.log("Table created");
+        process.exit();
       });
