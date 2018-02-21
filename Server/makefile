@@ -18,3 +18,6 @@ restartSever:
 startMySQL: 
 	@ssh -C $(USER)@$(IP) "sudo service mysql start"
 
+updateServer:
+	@ssh -C $(USER)@$(IP) "git -C ~/Platform-spanning/Server pull"
+
