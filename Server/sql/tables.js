@@ -42,7 +42,6 @@ FOREIGN KEY (user) REFERENCES users(id),\
 FOREIGN KEY (image) REFERENCES images(id)\
 )"
 
-db.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
     con.query(users, function (err, result) {
@@ -73,4 +72,3 @@ db.connect(function(err) {
         if (err) throw err;
         console.log("Table created");
       });
-  });
