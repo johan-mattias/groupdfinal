@@ -6,7 +6,7 @@ startSSHAgent:
 	@eval $(ssh-agent)
 	@ssh-add ~/.ssh/github
 
-ssh: 
+ssh: startSSHAgent
 	@ssh -t $(USER)@$(IP) "cd ~/Platform-spanning/Server; bash"
 
 runServer: 
