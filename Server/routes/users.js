@@ -12,4 +12,16 @@ router.get('/', function(req, res, next) {
 	});
 });
 
+
+router.post('/',function(req, res){
+	var name = req.body.name; 
+	console.log(name)
+	db.query('insert into values (?)', name.toString(),function(err, result){
+		if(err) throw err;
+		console.log("1 record inserted");
+	});
+	res.send(name+" has been added to database");
+
+	});
+
 module.exports = router;

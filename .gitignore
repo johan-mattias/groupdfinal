@@ -9,6 +9,9 @@ __pycache__/
 # npm
 node_modules/
 
+# uploaded images
+Server/public/
+
 # SSL cert
 *.crt
 *.csr

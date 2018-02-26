@@ -15,6 +15,8 @@ var users = require('./routes/users');
 var test = require('./routes/test');
 var stream = require('./routes/stream');
 var db = require('./db');
+var beer = require('./routes/beer');
+var image = require('./routes/image');
 
 //SSL cert and https
 var fs = require('fs');
@@ -45,6 +47,9 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/test', test);
 app.use('/stream', stream);
+app.use('/beer', beer);
+app.use('/image', image);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
