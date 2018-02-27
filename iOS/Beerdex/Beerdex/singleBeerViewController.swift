@@ -1,23 +1,24 @@
 //
-//  NavigationViewController.swift
+//  singleBeerViewController.swift
 //  Beerdex
 //
-//  Created by Adam Woods on 2018-02-17.
+//  Created by Adam Woods on 2018-02-27.
 //  Copyright © 2018 Adam Woods. All rights reserved.
 //
 
 import UIKit
 
-class NavigationViewController: UINavigationController {
+class singleBeerViewController: UIViewController {
 
+    @IBOutlet weak var beerImage: UIImageView!
+    
+    @IBOutlet weak var beerDescription: UITextView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationBar.topItem?.title = "Beerdex"
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.backgroundColor = UIColor.clear
         // Do any additional setup after loading the view.
     }
 
