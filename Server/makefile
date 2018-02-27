@@ -40,4 +40,4 @@ sendTestImage:
   		-F "user=1" \
   		-F "beer=1" \
   		-F "image=@/mnt/d/Downloads/507985.jpg" \
-  		localhost:8080/image
+  		localhost:8080/image/upload
