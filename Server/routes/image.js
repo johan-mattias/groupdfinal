@@ -20,11 +20,13 @@ var upload = multer({ storage: storage });
 
 router.post('/upload', upload.single('image'), function(req, res){
 
+    console.log(req.connection.remoteAddress);
     var post  = req.body;
     var beer = post.beer;
     var user = post.user;
 
-    if  ((user == null || user<1) && (beer == null || beer<1) && (!req.file))
+    
+    if  ((user == null) && (beer == null) && (!req.file))
     return res.status(400).send('Image were not uploaded. Invalid inputs.');
 
 
