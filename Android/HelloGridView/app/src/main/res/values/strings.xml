@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">HelloGridView</string>
+    <string name="title_activity_view">ViewActivity</string>
+    <string name="view_picture">View the picture</string>
+    <string name="desc_picture">Imageview description.</string>
+    <string name="textview_picture">Image fetched from the internet below this text.</string>
+</resources>
