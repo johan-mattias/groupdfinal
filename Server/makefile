@@ -27,9 +27,11 @@ updateServer:
 createNewTables:
 	@ssh -C $(USER)@$(IP) "node ~/Platform-spanning/Server/sql/createTables.js"
 
-localResetTables:
+localDropTables:
 	@node sql/dropTables.js
 	@node sql/dropViews.js
+	
+localCreateTables:
 	@node sql/createTables.js
 	@node sql/createViews.js
 	@node sql/fillDummy.js

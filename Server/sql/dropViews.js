@@ -7,5 +7,5 @@ console.log("Connected!");
 db.query(stream, function (err, result) {
   if (err) console.log("Table commenTs not dropped");
   else console.log("Table comments dropped");
-  process.kill();
+  process.exit();
 });
