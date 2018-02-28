@@ -19,7 +19,7 @@ router.post('/', function(req, res, next) {
 });
 
 function getMultipleImageDB(imageID,limit,callback){
-    var query = "select * from images where id>? limit ?";
+    var query = "select * from stream where image_id>? limit ?";
     var inserts = [imageID,limit];
     db.query(query,inserts, function (err, result) {
         if(err){
