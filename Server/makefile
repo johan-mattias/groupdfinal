@@ -29,15 +29,21 @@ createNewTables:
 
 localResetTables:
 	@node sql/dropTables.js
+	@node sql/dropViews.js
 	@node sql/createTables.js
+	@node sql/createViews.js
 	@node sql/fillDummy.js
 
 dropTables:
 	@ssh -C $(USER)@$(IP) "node ~/Platform-spanning/Server/sql/dropTables.js"
+
+
+
 
 sendTestImage:
 	@curl \
   		-F "user=1" \
   		-F "beer=1" \
   		-F "image=@/mnt/d/Downloads/507985.jpg" \
+		-F "description=hejsan!!!!" \
   		localhost:8080/image/upload
