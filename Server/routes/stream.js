@@ -25,7 +25,7 @@ function getMultipleImageDB(imageID,limit,callback){
         if(err){
             console.log("Error! Image with id: " +imageID+ " wasnt found.");
         }else
-            console.log("Image with id: " +imageID+ " found.");
+            console.log("Image with id: " +imageID+ "+ up to" +limit +"was sent");
             var res = result;
             // console.log("query: ",res);
             return callback(res);
