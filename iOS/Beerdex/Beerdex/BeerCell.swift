@@ -20,14 +20,15 @@ class BeerCell: UICollectionViewCell {
     
     func configure() {
         
-        self.textField.text = beer?.title
+        self.textField.text = beer?.link
+        self.backgroundColor = .white
         getImageForCell()
     }
     
     func getImageForCell() {
-        
-        guard let imageUrl = beer?.thumbnail_image_name,
-            let url = URL(string: imageUrl) else { return }
+        let baseUrl =  "http://188.166.170.111:8080/getImage/"
+        guard let imageUrl = beer?.link,
+            let url = URL(string: baseUrl + imageUrl) else { return }
         
         let imageUrlString = url
         
@@ -50,7 +51,6 @@ class BeerCell: UICollectionViewCell {
                     self.imageTitle.image = imageToCache
                 }
                 self.cache.setObject(imageToCache, forKey: url as AnyObject)
-                self.backgroundColor = .white
             }
         }.resume()
         

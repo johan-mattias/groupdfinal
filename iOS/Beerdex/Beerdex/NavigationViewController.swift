@@ -14,10 +14,10 @@ class NavigationViewController: UINavigationController {
         super.viewDidLoad()
         
         self.navigationBar.topItem?.title = "Beerdex"
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.backgroundColor = UIColor.clear
+        self.navigationBar.isTranslucent = true
+        self.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationBar.shadowImage = UIImage()
+        self.navigationBar.backgroundColor = UIColor.clear
         // Do any additional setup after loading the view.
     }
 
