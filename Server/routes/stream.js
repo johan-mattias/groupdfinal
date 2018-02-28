@@ -4,33 +4,32 @@ var mysql = require('mysql');
 var db = require('../db');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
 
-	var rawjson = {};
-    var key = 'stream';
-    rawjson[key] = [];
-    
-
-
-
-    for(i=1;i<=50;i=i+2){
-
-        var link1 = {
-            id: i,
-            link: 'https://res.cloudinary.com/teepublic/image/private/s--UvSUNgzW--/b_rgb:fffffe,t_Heather%20Preview/c_lpad,f_jpg,h_630,q_90,w_1200/v1494469473/production/designs/1595608_1.jpg'}
-    
-    
-        var link2 = {
-            id: i+1,
-            link: 'https://i0.wp.com/www.keepingkidsconnected.com/wp-content/uploads/2017/06/unicorn-e1498877455455.jpg?fit=300%2C294&ssl=1'
-        }
-
-        rawjson[key].push(link1);
-        rawjson[key].push(link2);
+    post = req.body;
+    lastImageID = post.lastImageID;
+    getMultipleImageDB(lastImageID,20,function(result){
+        if(result){
+        res.send(result);
+    }else{
+        res.status(400).send("No images was found")
     }
-    
-    res.send(JSON.stringify(rawjson))
+    })
 
 });
+
+function getMultipleImageDB(imageID,limit,callback){
+    var query = "select * from images where id>? limit ?";
+    var inserts = [imageID,limit];
+    db.query(query,inserts, function (err, result) {
+        if(err){
+            console.log("Error! Image with id: " +imageID+ " wasnt found.");
+        }else
+            console.log("Image with id: " +imageID+ " found.");
+            var res = result;
+            // console.log("query: ",res);
+            return callback(res);
+        });
+}
 
 module.exports = router;
