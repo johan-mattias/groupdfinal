@@ -77,9 +77,9 @@ function imageInsertDB(image,user,beer,description){
     var inserts = [image,user,beer,description];
         db.query(images,inserts, function (err, result) {
             if (err){
-                console.log("Image with id: " +image.toString()+ " uploaded.");
-            }else{
                 console.log("Image with id: " +image.toString()+ " not uploaded.");
+            }else{
+                console.log("Image with id: " +image.toString()+ " uploaded.");
             
             }
             });
