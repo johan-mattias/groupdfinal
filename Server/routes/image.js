@@ -20,21 +20,24 @@ var upload = multer({ storage: storage });
 
 router.post('/upload', upload.single('image'), function(req, res){
 
-    console.log(req.connection.remoteAddress);
     var post  = req.body;
     var beer = post.beer;
     var user = post.user;
-
+    var description = post.description;
     
     if  ((user == null) && (beer == null) && (!req.file))
     return res.status(400).send('Image were not uploaded. Invalid inputs.');
 
+    if (description==null) {
+        description=""
+    }
 
     var file = req.file;
     var id = file.filename;
 
-	res.send("id: "+id.toString());
-    imageInsertDB(id,1,1);
+    imageInsertDB(id,user,beer,description);
+	res.status(200).send("image uploaded");
+
 	});
 
 router.post('/download', function(req, res){
@@ -59,21 +62,26 @@ function getImageDB(imageID,callback){
     var inserts = [imageID];
     db.query(query,inserts, function (err, result) {
         if(err){
-            console.log("Error! Image with id: " +imageID.toString()+ " wasnt found.");
+            console.log("Error! Image with id: " +imageID+ " wasnt found.");
         }else
-            console.log("Image with id: " +imageID.toString()+ " found.");
+            console.log("Image with id: " +imageID+ " found.");
             var res = result[0];
             console.log("query: ",res);
             return callback(res);
         });
 }
 
-function imageInsertDB(image,user,beer){
-    var images = "insert into images (link,userID,beerID) "+
-        "values (?,?,?)";
-    var inserts = [image,user,beer];
+function imageInsertDB(image,user,beer,description){
+    var images = "insert into images (link,userID,beerID,description) "+
+        "values (?,?,?,?)";
+    var inserts = [image,user,beer,description];
         db.query(images,inserts, function (err, result) {
-            console.log("Image with id: " +image.toString()+ " uploaded.");
+            if (err){
+                console.log("Image with id: " +image.toString()+ " uploaded.");
+            }else{
+                console.log("Image with id: " +image.toString()+ " not uploaded.");
+            
+            }
             });
 
 }
