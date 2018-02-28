@@ -4,7 +4,7 @@ var db = require('../db');
 
 var stream = "create view stream as select images.id as image_id ,link,users.name as user_name,"+
 "beers.name as beer_name,beerTypes.name as beer_type, breweries.name as Brewery_name,"+
-"countries.name as Country from images "+
+"countries.name as Country, description from images "+
 "Inner join users on userID=users.ID "+
 "inner join beers on beerID=beers.id "+
 "inner join beerTypes on beerTypeID=beerTypes.ID "+
