@@ -14,6 +14,7 @@ class BeerCell: UICollectionViewCell {
     // TODO: Check if bad place for cache? Each cell gets one?
     let cache = NSCache<AnyObject, AnyObject>()
     var beer: Beer?
+    let baseUrl =  "http://188.166.170.111:8080/getImage/"
     
     @IBOutlet weak var imageTitle: UIImageView!
     @IBOutlet weak var textField: UITextField!
@@ -26,7 +27,7 @@ class BeerCell: UICollectionViewCell {
     }
     
     func getImageForCell() {
-        let baseUrl =  "http://188.166.170.111:8080/getImage/"
+        
         guard let imageUrl = beer?.link,
             let url = URL(string: baseUrl + imageUrl) else { return }
         
