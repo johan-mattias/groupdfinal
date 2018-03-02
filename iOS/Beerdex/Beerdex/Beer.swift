@@ -9,8 +9,12 @@
 import Foundation
 
 class Beer: Codable {
-    let id: Int
+    let image_id: Int
     let link: String
-    let userID: Int
-    let beerID: Int
+    let user_name: String
+    let beer_name: String
+    let beer_type: String
+    let brewery_name: String
+    let country: String
+    let description: String
 }
