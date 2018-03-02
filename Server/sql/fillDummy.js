@@ -39,11 +39,8 @@ db.query(breweries, function (err, result) {
   db.query(beers, function (err, result) {
     if (err) throw error;
     else console.log("Table beers filled with dummies");
+    process.exit();
   });
 
-  db.query(images, function (err, result) {
-    if (err) throw error;
-    else console.log("Table images filled with dummies");
-  });
 
 

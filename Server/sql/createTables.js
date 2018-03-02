@@ -38,9 +38,10 @@ var beers = "Create table beers ("+
 
 var images = "Create table images ("+
     "id int auto_increment primary key,"+
-    "link varchar(100),"+
+    "link varchar(50),"+
     "userID int not null,"+
     "beerID int not null,"+
+    "description varchar(1000),"+
     "FOREIGN KEY (userID) REFERENCES users(id),"+
     "FOREIGN KEY (beerID) REFERENCES beers(id),"+
     "Unique (link)"+

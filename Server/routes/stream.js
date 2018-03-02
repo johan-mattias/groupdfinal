@@ -19,13 +19,13 @@ router.post('/', function(req, res, next) {
 });
 
 function getMultipleImageDB(imageID,limit,callback){
-    var query = "select * from images where id>? limit ?";
+    var query = "select * from stream where image_id>? limit ?";
     var inserts = [imageID,limit];
     db.query(query,inserts, function (err, result) {
         if(err){
             console.log("Error! Image with id: " +imageID+ " wasnt found.");
         }else
-            console.log("Image with id: " +imageID+ " found.");
+            console.log("Image with id: " +imageID+ "+ up to" +limit +"was sent");
             var res = result;
             // console.log("query: ",res);
             return callback(res);
