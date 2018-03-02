@@ -28,6 +28,10 @@ router.post('/upload', upload.single('image'), function(req, res){
     var user = post.user;
     var description = post.description;
     
+    console.log("user: ",user);
+    console.log("beer: ",beer);
+    console.log("desc: ",description);
+    console.log(req.file);
 
     if  ((user == null) && (beer == null) && (!req.file))
     return res.status(400).send('Image were not uploaded. Invalid inputs.');
