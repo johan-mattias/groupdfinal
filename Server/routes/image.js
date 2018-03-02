@@ -14,7 +14,6 @@ var storage = multer.diskStorage({
       cb(null, imagePath)
     },
     filename: function (req, file, cb) {
-        console.log(file.mimeType);
       cb(null, idgen(16)+'.'+mime.extension(file.mimetype));
     }
   })
@@ -28,12 +27,8 @@ router.post('/upload', upload.single('image'), function(req, res){
     var user = post.user;
     var description = post.description;
     
-    console.log("user: ",user);
-    console.log("beer: ",beer);
-    console.log("desc: ",description);
-    console.log(req.file);
 
-    if  ((user == null) && (beer == null) && (!req.file))
+    if  ((user === null) && (beer === null) && (!req.file))
     return res.status(400).send('Image were not uploaded. Invalid inputs.');
 
     if (description==null) {
@@ -51,10 +46,10 @@ router.post('/upload', upload.single('image'), function(req, res){
         quiet:true,
       }, function(files, err, stdout, stderr) {
         if(err){
-            console.log("Something went wrong!");
+            console.log("Something went wrong with thumb!");
             console.log(err);
         }else{
-        console.log('All done!');
+        console.log('Thumb done!');
         }
       });
 
