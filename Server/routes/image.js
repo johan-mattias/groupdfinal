@@ -5,11 +5,13 @@ var mysql = require('mysql');
 var db = require('../db');
 var multer  = require('multer');
 const mime = require('mime');
+var thumb = require('node-thumbnail').thumb;
+var imagePath = 'public/images/uploaded_images/';
 resolve = require('path').resolve;
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'public/images/uploaded_images/')
+      cb(null, imagePath)
     },
     filename: function (req, file, cb) {
       cb(null, idgen(16)+'.'+mime.extension(file.mimetype));
@@ -25,6 +27,11 @@ router.post('/upload', upload.single('image'), function(req, res){
     var user = post.user;
     var description = post.description;
     
+    console.log("user: ",user);
+    console.log("beer: ",beer);
+    console.log("desc: ",description);
+    console.log(req.file);
+
     if  ((user == null) && (beer == null) && (!req.file))
     return res.status(400).send('Image were not uploaded. Invalid inputs.');
 
@@ -33,9 +40,26 @@ router.post('/upload', upload.single('image'), function(req, res){
     }
 
     var file = req.file;
-    var id = file.filename;
+    var filename = file.filename;
 
-    imageInsertDB(id,user,beer,description);
+
+    thumb({
+        source: __basedir +'/'+imagePath+filename, // could be a filename: dest/path/image.jpg
+        destination: __basedir +'/'+imagePath,
+        width:400,
+        quiet:true,
+      }, function(files, err, stdout, stderr) {
+        if(err){
+            console.log("Something went wrong!");
+            console.log(err);
+        }else{
+        console.log('All done!');
+        }
+      });
+
+
+
+    imageInsertDB(filename,user,beer,description);
 	res.status(200).send("image uploaded");
 
 	});
@@ -47,7 +71,7 @@ router.post('/download', function(req, res){
     getImageDB(imageID,function(result){
         if(result){
         imageName = result.link;
-        var path = resolve('public/images/uploaded_images/'+imageName);
+        var path = resolve(imagePath+imageName);
         res.sendFile(path);
     }else{
         res.status(400).send("Image was not found")
