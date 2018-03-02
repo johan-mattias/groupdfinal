@@ -10,6 +10,7 @@ import UIKit
 
 class singleBeerViewController: UIViewController {
 
+    var singleImage = UIImage()
     @IBOutlet weak var beerImage: UIImageView!
     
     @IBOutlet weak var beerDescription: UITextView!
@@ -18,7 +19,7 @@ class singleBeerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.beerImage.image = singleImage
         // Do any additional setup after loading the view.
     }
 
