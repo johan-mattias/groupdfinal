@@ -25,6 +25,8 @@ var https = require('https');
 var privateKey  = fs.readFileSync('sslcert/beerdex.key', 'utf8');
 var certificate = fs.readFileSync('sslcert/beerdex.crt', 'utf8');
 
+global.__basedir = __dirname;
+
 var credentials = {key: privateKey, cert: certificate};
 
 
