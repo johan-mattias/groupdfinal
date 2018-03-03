@@ -1,10 +1,11 @@
 {
   "employees": [
     {
+      "name": "KUKEN",
       "id": 1,
-      "first_name": "Sebastian",
-      "last_name": "Eschweiler",
-      "email": "sebastian@codingthesmartway.com"
+      "email": "kuk@fitta.com",
+      "first_name": "Balle",
+      "last_name": "Fitta"
     },
     {
       "id": 2,
@@ -17,6 +18,19 @@
       "first_name": "Ann",
       "last_name": "Smith",
       "email": "ann@codingthesmartway.com"
+    },
+    {
+      "email": "zohrath@gmail.com",
+      "first_name": "Adam",
+      "id": 4,
+      "last_name": "Woods"
+    },
+    {
+      "email": "z@z.com",
+      "last_name": "Woods",
+      "name": "Adam Woods",
+      "first_name": "Adam",
+      "id": 5
     }
   ]
 }
