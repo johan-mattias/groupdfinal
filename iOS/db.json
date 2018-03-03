@@ -1,13 +1,6 @@
 {
   "employees": [
     {
-      "name": "KUKEN",
-      "id": 1,
-      "email": "kuk@fitta.com",
-      "first_name": "Balle",
-      "last_name": "Fitta"
-    },
-    {
       "id": 2,
       "first_name": "Steve",
       "last_name": "Palmer",

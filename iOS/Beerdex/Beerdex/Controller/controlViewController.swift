@@ -33,7 +33,6 @@ class controlViewController: UIViewController, UICollectionViewDataSource, UICol
         super.viewDidLoad()
         setupView()
         getDataFromServer()
-//        uploadImage()
     }
 
     func setupView() {
@@ -42,7 +41,7 @@ class controlViewController: UIViewController, UICollectionViewDataSource, UICol
     }
 
     func getDataFromServer() {
-        downloadData() { (data) in
+        downloadBeerMetaData() { (data) in
             guard let data = data else {
                 print("Download failed")
                 return
@@ -56,7 +55,7 @@ class controlViewController: UIViewController, UICollectionViewDataSource, UICol
         }
     }
     
-    func downloadData(with completionHandler: @escaping imageMetaData ) {
+    func downloadBeerMetaData(with completionHandler: @escaping imageMetaData ) {
         
         let urlRequest = BeerRouter.getAll.asURLRequest()
         
@@ -68,12 +67,14 @@ class controlViewController: UIViewController, UICollectionViewDataSource, UICol
             if let response = response {
                 print(response)
             }
-            completionHandler(data)
+            if let data = data {
+                completionHandler(data)
+            }
         }
         task.resume()
     }
     
-    func uploadPicture() {
+    func uploadBeer() {
         let url = "http://188.166.170.111:8080/image/upload"
         let image = #imageLiteral(resourceName: "impstout")
         let imageData = UIImageJPEGRepresentation(image, 1.0)!

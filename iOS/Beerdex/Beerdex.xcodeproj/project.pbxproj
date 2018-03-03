@@ -49,7 +49,7 @@
 		AB6469DA2031B94E001862E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABD51D342038585A00DA67A4 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		ABE113F5204AA87000261644 /* BeerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerRouter.swift; sourceTree = "<group>"; };
-		ABFAC62C2036E8D800044117 /* BeerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BeerCell.swift; path = "/Users/zohrath/Coding/Platform/Platform-spanning/iOS/Beerdex/Beerdex/BeerCell.swift"; sourceTree = "<absolute>"; };
+		ABFAC62C2036E8D800044117 /* BeerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BeerCell.swift; path = "/Users/zohrath/Coding/Platform/Platform-spanning/iOS/Beerdex/Beerdex/View/BeerCell.swift"; sourceTree = "<absolute>"; };
 		ABFD3DA12045C1EA00F2E674 /* controlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = controlViewController.swift; sourceTree = "<group>"; };
 		ABFD3DA32045D60000F2E674 /* singleBeerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = singleBeerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,14 +113,12 @@
 		AB6469BF2031B94D001862E8 /* Beerdex */ = {
 			isa = PBXGroup;
 			children = (
+				ABE113FA204AC44B00261644 /* Network */,
+				ABE113F9204AC3DF00261644 /* Controller */,
+				ABE113F8204AC3B900261644 /* View */,
+				ABE113F7204AC39E00261644 /* Model */,
 				AB6469C02031B94D001862E8 /* AppDelegate.swift */,
 				AB6469C42031B94D001862E8 /* Main.storyboard */,
-				ABFD3DA32045D60000F2E674 /* singleBeerViewController.swift */,
-				ABFD3DA12045C1EA00F2E674 /* controlViewController.swift */,
-				ABE113F5204AA87000261644 /* BeerRouter.swift */,
-				ABD51D342038585A00DA67A4 /* NavigationViewController.swift */,
-				ABFAC62C2036E8D800044117 /* BeerCell.swift */,
-				AB226AE92031BE830012BFE6 /* Beer.swift */,
 				AB6469CA2031B94D001862E8 /* Assets.xcassets */,
 				AB6469CC2031B94D001862E8 /* LaunchScreen.storyboard */,
 				AB6469CF2031B94D001862E8 /* Info.plist */,
@@ -136,6 +134,40 @@
 				AB6469DA2031B94E001862E8 /* Info.plist */,
 			);
 			path = BeerdexTests;
+			sourceTree = "<group>";
+		};
+		ABE113F7204AC39E00261644 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AB226AE92031BE830012BFE6 /* Beer.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		ABE113F8204AC3B900261644 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ABFAC62C2036E8D800044117 /* BeerCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ABE113F9204AC3DF00261644 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				ABFD3DA32045D60000F2E674 /* singleBeerViewController.swift */,
+				ABFD3DA12045C1EA00F2E674 /* controlViewController.swift */,
+				ABD51D342038585A00DA67A4 /* NavigationViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		ABE113FA204AC44B00261644 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				ABE113F5204AA87000261644 /* BeerRouter.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
