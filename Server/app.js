@@ -17,6 +17,7 @@ var stream = require('./routes/stream');
 var db = require('./db');
 var beer = require('./routes/beer');
 var image = require('./routes/image');
+var comment = require('./routes/comment');
 
 //SSL cert and https
 var fs = require('fs');
@@ -44,6 +45,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/getImage', express.static(__dirname + '/public/images/uploaded_images'));
+app.use('/robots.txt', express.static(__dirname + '/robots.txt'));
+
 
 app.use('/', index);
 app.use('/users', users);
@@ -51,7 +54,7 @@ app.use('/test', test);
 app.use('/stream', stream);
 app.use('/beer', beer);
 app.use('/image', image);
-
+app.use('/comment', comment);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
