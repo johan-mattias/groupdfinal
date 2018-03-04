@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 var db = require('../db');
-const mime = require('mime');
 
 
 
@@ -30,17 +29,17 @@ router.post('/download', function(req, res){
     getCommentDB(imageID,lastCommentID,function(result){
         if(result){
         
-        res.status(200).send(result);
-    }else{
-        res.status(400).send("Image was not found")
-    }
+            res.status(200).send(result);
+        }else{
+            res.status(400).send("Image was not found")
+        }
     });
     
     });
 
 
 function getCommentDB(imageID,lastCommentID, callback){
-    var query = "select * from comments where imageid=? and id>? limit 20";
+    var query = "select * from commentView where imageID=? and commentID>? limit 20";
     var inserts = [imageID,lastCommentID];
     db.query(query,inserts, function (err, result) {
         if(err){
