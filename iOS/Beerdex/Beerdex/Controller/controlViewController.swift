@@ -22,37 +22,32 @@ class controlViewController: UIViewController, UICollectionViewDataSource, UICol
     private var downloadedImages = 0
     private var beersArray: [Beer]? {
         didSet {
-            print("Set")
+            print("Set beer array")
             DispatchQueue.main.async {
                 self.collection.reloadData()
             }
         }
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         getDataFromServer()
-        uploadImage()
     }
 
     func setupView() {
         self.view.backgroundColor = .white
         collection.backgroundColor = .white
-        
     }
-    
+
     func getDataFromServer() {
-        downloadData() { (data) in
+        downloadBeerMetaData() { (data) in
             guard let data = data else {
                 print("Download failed")
                 return
             }
             do {
-                let beer = try
-                    JSONDecoder().decode([Beer].self, from: data)
+                let beer = try JSONDecoder().decode([Beer].self, from: data)
                 self.beersArray = beer
             } catch let jsonerr {
                 print("Error", jsonerr)
@@ -60,54 +55,47 @@ class controlViewController: UIViewController, UICollectionViewDataSource, UICol
         }
     }
     
-    func downloadData(with completionHandler: @escaping imageMetaData ) {
+    func downloadBeerMetaData(with completionHandler: @escaping imageMetaData ) {
         
-        let todoEndpoint = "http://188.166.170.111:8080/stream"
-        guard let url = URL(string: todoEndpoint) else { return }
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "POST"
-        urlRequest.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        
-        guard let body = try? JSONSerialization.data(withJSONObject: ["lastImageID":downloadedImages], options: []) else {
-            return
-        }
-        urlRequest.httpBody = body
+        let urlRequest = BeerRouter.getAll.asURLRequest()
         
         let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            
+
             if let error = error {
                 print(error)
             }
-            completionHandler(data)
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                completionHandler(data)
+            }
         }
         task.resume()
     }
     
-    func uploadImage() {
-        // TODO: Add image picker
-        guard let imageToUpload = UIImageJPEGRepresentation(#imageLiteral(resourceName: "impstout"), 1) else { print ("Failed to serialize image"); return }
-        
-        // TODO: Add endpoint
-        guard let uploadurl = URL(string: "http://188.166.170.111:8080/image/upload") else { return }
-        
-        var request = URLRequest(url: uploadurl)
-        request.httpMethod = "POST"
-        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        guard let body = try? JSONSerialization.data(withJSONObject: ["image":"impstout", "user": 1, "beer": 1, "description": "Test desc"], options: []) else {
-            return
+    func uploadBeer() {
+        let url = "http://188.166.170.111:8080/image/upload"
+        let image = #imageLiteral(resourceName: "impstout")
+        let imageData = UIImageJPEGRepresentation(image, 1.0)!
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                multipartFormData.append(imageData, withName: "image", fileName: "impstout.jpg", mimeType: "image/jpeg")
+        },
+            to: url,
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseString { response in
+                        debugPrint(response)
+                    }
+                case .failure(let encodingError):
+                    print(encodingError)
+                }
         }
-        request.httpBody = body
-        print ("TEST")
-        
-        let configuration = URLSessionConfiguration.default
-        let session = URLSession(configuration: configuration, delegate: self as? URLSessionDelegate, delegateQueue: OperationQueue.main)
-        let task = session.uploadTask(with: request, from: imageToUpload)
-        
-        task.resume()
-    }
+        )}
     
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+   func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }

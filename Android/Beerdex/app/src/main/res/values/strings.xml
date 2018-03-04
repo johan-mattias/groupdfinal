@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Beerdex</string>
+    <string name="card_info">Description of the picture. Maintext.</string>
+    <string name="card_sub">Name of the uploader/author? Subtext.</string>
+</resources>
