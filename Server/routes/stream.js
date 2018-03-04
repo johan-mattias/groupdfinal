@@ -27,7 +27,6 @@ function getMultipleImageDB(imageID,limit,callback){
         }else
             console.log("Image with id: " +imageID+ "+ up to" +limit +"was sent");
             var res = result;
-            // console.log("query: ",res);
             return callback(res);
         });
 }
