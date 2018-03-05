@@ -11,9 +11,17 @@ var stream = "create view stream as select images.id as image_id ,link,users.nam
 "inner join breweries on breweryID=breweries.id "+
 "inner join countries on countryID=countries.id";
 
+var comment = "create view commentView as select comments.id as commentID, imageID, users.name as userName,comment from comments "+
+"Inner join users on userID=users.ID";
+
+
 console.log("Connected!");
 db.query(stream, function (err, result) {
   if (err) throw err;
   console.log("View stream created");
+});
+db.query(comment, function (err, result) {
+  if (err) throw err;
+  console.log("View commentView created");
   process.exit();
 });

@@ -48,13 +48,14 @@ var images = "Create table images ("+
     ")"
 
 var comments = "Create table comments ("+
-    "id int auto_increment primary key,"+
+    "id int auto_increment,"+
     "userID int not null,"+
     "imageID int not null,"+
     "FOREIGN KEY (userID) REFERENCES users(id),"+
     "FOREIGN KEY (imageID) REFERENCES images(id),"+
-    "comment varchar(400)"+
-")"
+    "comment varchar(400), "+
+    "primary key (imageID,id)"+
+") ENGINE=MyISAM;"
 
 
     console.log("Connected!");
