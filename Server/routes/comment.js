@@ -8,15 +8,15 @@ var db = require('../db');
 router.post('/upload', function(req, res){
 
     var post  = req.body;
-    var image = post.image;
-    var user = post.user;
+    var imageID = post.imageID;
+    var userID = post.userID;
     var comment = post.comment;
     
 
-    if  ((user === null) && (image === null) && (comment === null))
+    if  ((userID === null) && (imageID === null) && (comment === null))
     return res.status(400).send('Comment were not uploaded. Invalid inputs.');
 
-    commentInsertDB(user,image,comment);
+    commentInsertDB(userID,imageID,comment);
 	res.status(200).send("Comment uploaded");
 
 	});

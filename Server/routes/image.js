@@ -23,15 +23,15 @@ var upload = multer({ storage: storage });
 router.post('/upload', upload.single('image'), function(req, res){
 
     var post  = req.body;
-    var beer = post.beer;
-    var user = post.user;
+    var beerID = post.beerID;
+    var userID = post.userID;
     var description = post.description;
     
 
-    if  ((user === null) && (beer === null) && (!req.file))
+    if  ((userID === null) && (beerID === null) && (!req.file))
     return res.status(400).send('Image were not uploaded. Invalid inputs.');
 
-    if (description==null) {
+    if (description===null) {
         description=""
     }
 
@@ -55,7 +55,7 @@ router.post('/upload', upload.single('image'), function(req, res){
 
 
 
-    imageInsertDB(filename,user,beer,description);
+    imageInsertDB(filename,userID,beerID,description);
 	res.status(200).send("image uploaded");
 
 	});
