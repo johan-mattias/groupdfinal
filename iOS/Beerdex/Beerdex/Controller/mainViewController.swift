@@ -11,14 +11,17 @@ import Alamofire
 
 private let reuseIdentifier = "BeerCell"
 
-class controlViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class mainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     typealias imageMetaData = (Data?) -> ()
     
     @IBOutlet weak var collection: UICollectionView!
-    
+    @IBAction func pressedSelectImageButton(_ sender: UIButton) {
+        openImageLib()
+    }
     
     private var selectedImage: UIImageView?
+    private var selectedDescription: String?
     private var downloadedImages = 0
     private var beersArray: [Beer]? {
         didSet {
@@ -33,7 +36,6 @@ class controlViewController: UIViewController, UICollectionViewDataSource, UICol
         super.viewDidLoad()
         setupView()
         getDataFromServer()
-        uploadBeer()
     }
 
     func setupView() {
@@ -75,10 +77,10 @@ class controlViewController: UIViewController, UICollectionViewDataSource, UICol
         task.resume()
     }
     
-    func upload() {
+    func upload(image: UIImage) {
         let urlRequest = BeerRouter.upload.asURLRequest()
-        let image = UIImageJPEGRepresentation(#imageLiteral(resourceName: "impstout"), 1.0)
-        let task = URLSession.shared.uploadTask(with: urlRequest, from: image) { (data, response, error) in
+        let imageData = UIImageJPEGRepresentation(image, 1.0)
+        let task = URLSession.shared.uploadTask(with: urlRequest, from: imageData) { (data, response, error) in
             if let error = error {
                 print(error)
             }
@@ -92,10 +94,8 @@ class controlViewController: UIViewController, UICollectionViewDataSource, UICol
         task.resume()
     }
     
-    // TODO: Implement image picker protocol for dynamic selection of images
-    func uploadBeer() {
+    func uploadBeer(image: UIImage) {
         let url = "http://188.166.170.111:8080/image/upload"
-        let image = #imageLiteral(resourceName: "impstout")
         let imageData = UIImageJPEGRepresentation(image, 1.0)!
         let parameters = ["beerID":"1", "userID":"1", "description":"ANYTHING!"]
         Alamofire.upload(
@@ -118,17 +118,32 @@ class controlViewController: UIViewController, UICollectionViewDataSource, UICol
         })
     }
     
+    func openImageLib() {
+        let controller = UIImagePickerController()
+        controller.delegate = self
+        controller.sourceType = .photoLibrary
+        
+        present(controller, animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        uploadBeer(image: image)
+        dismiss(animated: true, completion: nil)
+    }
+    
    func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return beersArray?.count ?? 0
     }
-    
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BeerCell
@@ -142,7 +157,9 @@ class controlViewController: UIViewController, UICollectionViewDataSource, UICol
         
         let selectedCell = collection.cellForItem(at: indexPath) as! BeerCell
         guard let cellImageView = selectedCell.imageTitle else { return }
+        let description = selectedCell.textField.text
         self.selectedImage = cellImageView
+        self.selectedDescription = description
         
         performSegue(withIdentifier: "showSingleBeer", sender: Any?.self)
     }
@@ -153,6 +170,7 @@ class controlViewController: UIViewController, UICollectionViewDataSource, UICol
         if segue.identifier == "showSingleBeer" {
             let dest = segue.destination as! singleBeerViewController
             dest.singleImage = (self.selectedImage?.image)!
+            dest.text = self.selectedDescription!
             // TODO: Set destination data such as the proper image
         }
     }

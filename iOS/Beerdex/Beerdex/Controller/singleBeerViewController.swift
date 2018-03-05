@@ -8,9 +8,10 @@
 
 import UIKit
 
-class singleBeerViewController: UIViewController {
+class singleBeerViewController: UIViewController, UITextViewDelegate {
 
     var singleImage = UIImage()
+    var text = String()
     @IBOutlet weak var beerImage: UIImageView!
     
     @IBOutlet weak var beerDescription: UITextView!
@@ -19,7 +20,10 @@ class singleBeerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.beerImage.image = singleImage
+        self.beerDescription.delegate = self
+        self.beerDescription.text = "KJBSDAFKJBALFKJBSAFLKJB"
         // Do any additional setup after loading the view.
     }
 
@@ -28,7 +32,10 @@ class singleBeerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        self.text = "KJSDBFÖKJSDB"
+        return true
+    }
     /*
     // MARK: - Navigation
 
