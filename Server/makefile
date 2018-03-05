@@ -46,16 +46,16 @@ dropTables:
 
 sendTestImage:
 	@curl \
-  		-F "user=1" \
-  		-F "beer=1" \
+  		-F "userID=1" \
+  		-F "beerID=1" \
   		-F "image=@/mnt/d/Downloads/507985.jpg" \
 		-F "description=hejsan!!!!" \
   		188.166.170.111:8080/image/upload
 
 sendLocalTestImage:
 	@curl \
-		-F "user=1" \
-  		-F "beer=1" \
+		-F "userID=1" \
+  		-F "beerID=1" \
   		-F "image=@/mnt/d/Downloads/507985.jpg" \
 		-F "description=hejsan!!!!" \
   		localhost:8080/image/upload
