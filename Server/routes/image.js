@@ -36,7 +36,7 @@ router.post('/upload', upload.single('image'), function(req, res){
     
 
 
-    if  ((userID === null) && (beerID === null) && (!req.file))
+    if  ((userID == null) || (beerID == null) || (!req.file))
     return res.status(400).send('Image were not uploaded. Invalid inputs.');
 
     if (description===null) {
