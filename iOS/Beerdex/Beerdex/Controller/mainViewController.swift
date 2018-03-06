@@ -16,6 +16,7 @@ class mainViewController: UIViewController, UICollectionViewDataSource, UICollec
     typealias imageMetaData = (Data?) -> ()
     
     @IBOutlet weak var collection: UICollectionView!
+    
     @IBAction func pressedSelectImageButton(_ sender: UIButton) {
         openImageLib()
     }
@@ -77,25 +78,7 @@ class mainViewController: UIViewController, UICollectionViewDataSource, UICollec
         task.resume()
     }
     
-    func upload(image: UIImage) {
-        let urlRequest = BeerRouter.upload.asURLRequest()
-        let imageData = UIImageJPEGRepresentation(image, 1.0)
-        let task = URLSession.shared.uploadTask(with: urlRequest, from: imageData) { (data, response, error) in
-            
-            if let error = error {
-                print(error)
-            }
-            if let response = response {
-                print(response)
-            }
-            if let data = data {
-                print(data)
-            }
-        }
-        task.resume()
-    }
-    
-    func uploadBeer(image: UIImage) {
+    func uploadBeerData(image: UIImage) {
         let url = "http://188.166.170.111:8080/image/upload"
         let imageData = UIImageJPEGRepresentation(image, 1.0)!
         let parameters = ["beerID":"1", "userID":"1", "description":"ANYTHING!"]
@@ -133,12 +116,11 @@ class mainViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        upload(image: image)
+        uploadBeerData(image: image)
         dismiss(animated: true, completion: nil)
     }
     
    func numberOfSections(in collectionView: UICollectionView) -> Int {
-    
         return 1
     }
     
@@ -171,8 +153,7 @@ class mainViewController: UIViewController, UICollectionViewDataSource, UICollec
         if segue.identifier == "showSingleBeer" {
             let dest = segue.destination as! singleBeerViewController
             dest.singleImage = (self.selectedImage?.image)!
-            dest.text = self.selectedDescription!
-            // TODO: Set destination data such as the proper image
+            dest.descriptionText = self.selectedDescription!
         }
     }
     
