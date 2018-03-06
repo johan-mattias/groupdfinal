@@ -142,24 +142,31 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
-        //smr.addStringParam("user", "1");
-        //smr.addStringParam("beer", "1");
-        //smr.addStringParam("user",  "1");
-        //smr.addStringParam("beer", "1");
-       JSONObject jsonBody = new JSONObject();
-        try {
-            jsonBody.put("user", "1");
-            jsonBody.put("beer", "1");
-            jsonBody.put("description", "1");
-        } catch (JSONException e) {
-            e.printStackTrace();
+        // ACTUALLY GRANT THE APP TO GET PERMISSION TO ACSESS FILE
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            //This will print a toast which just tells you if the permission is granted or not
+            //Toast.makeText(MainActivity.this, "READ permission not granted.", Toast.LENGTH_SHORT).show();
+            //requestReadPermission();
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 200);
         }
-
-        //smr.addStringParam("user", "1");
-        //smr.addStringParam("beer", "1");
-        //smr.addStringParam("description", "hejasdiuhasfoiuiagsoi");
-        smr.par
+        // ACTUALLY GRANT THE APP TO GET PERMISSION TO ACSESS FILE
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            //This will print a toast which just tells you if the permission is granted or not
+            //Toast.makeText(MainActivity.this, "WRITE permission not granted.", Toast.LENGTH_SHORT).show();
+            //requestWritePermission();
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 200);
+        }
+        //since no login is implemented we cannot actually tell the id
+        smr.addStringParam("userID", "1");
+        //Todo: Need to implement something that tells you what kind of beer it is
+        smr.addStringParam("beerID", "1");
+        smr.addStringParam("imagename", "nurre.jpeg");
+        smr.addStringParam("mimetype", "image/jpeg");
+        //Todo: Need to implemnent a text-field that the user can type in and upload as a description
+        smr.addStringParam("description", "Hej nurreHej nurreHej nurreHej nurreHej nurreHej nurreHej nurreHej nurreHej nurreHej nurreHej nurre");
+        //Adding the picture TODO: might have to cast the sending picture to .jpeg
         smr.addFile("image", imagePath);
         MyApplication.getInstance().addToRequestQueue(smr);
     }
