@@ -14,16 +14,15 @@ class singleBeerViewController: UIViewController, UITextViewDelegate {
     var text = String()
     @IBOutlet weak var beerImage: UIImageView!
     
-    @IBOutlet weak var beerDescription: UITextView!
+    @IBOutlet weak var beerDescription: UILabel!
+    
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.beerImage.image = singleImage
-        self.beerDescription.delegate = self
-        self.beerDescription.text = "KJBSDAFKJBALFKJBSAFLKJB"
+        beerDescription.text = text
         // Do any additional setup after loading the view.
     }
 
@@ -32,10 +31,6 @@ class singleBeerViewController: UIViewController, UITextViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        self.text = "KJSDBFÖKJSDB"
-        return true
-    }
     /*
     // MARK: - Navigation
 

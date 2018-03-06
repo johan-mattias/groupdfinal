@@ -53,7 +53,7 @@ class mainViewController: UIViewController, UICollectionViewDataSource, UICollec
                 let beer = try JSONDecoder().decode([Beer].self, from: data)
                 self.beersArray = beer
             } catch let jsonerr {
-                print("Error", jsonerr)
+                print("Error: \(jsonerr)")
             }
         }
     }
@@ -81,6 +81,7 @@ class mainViewController: UIViewController, UICollectionViewDataSource, UICollec
         let urlRequest = BeerRouter.upload.asURLRequest()
         let imageData = UIImageJPEGRepresentation(image, 1.0)
         let task = URLSession.shared.uploadTask(with: urlRequest, from: imageData) { (data, response, error) in
+            
             if let error = error {
                 print(error)
             }
@@ -132,12 +133,12 @@ class mainViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        uploadBeer(image: image)
+        upload(image: image)
         dismiss(animated: true, completion: nil)
     }
     
    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+    
         return 1
     }
     
