@@ -120,3 +120,4 @@ motions_html/
 
 # Jupyter
 *.ipynb
+*.xcbkptlist
