@@ -27,7 +27,7 @@ public enum BeerRouter {
             let relativePath: String?
         
             switch self {
-            case .getAll: relativePath = "stream"
+                case .getAll: relativePath = "stream"
             }
             
             var url = URL(string: BeerRouter.baseURLString)!
@@ -37,20 +37,30 @@ public enum BeerRouter {
             return url
         }()
         
-        let parameters: [String : Int]? = {
+        let parameters: [String : String]? = {
             switch self {
-            case .getAll: return ["lastImageID":0]
+                case .getAll: return ["lastImageID":"0"]
             }
+        }()
+        
+        let contentType: [String : String]? = {
+            switch self {
+                case .getAll: return ["content-type" : "application/json"]
+            }
+            
         }()
         
         var request = URLRequest(url: url)
         request.httpMethod = method
-        request.addValue("Application/json", forHTTPHeaderField: "Content-Type")
+        if let contentType = contentType?["content-type"] {
+            request.addValue(contentType, forHTTPHeaderField: "content-type")
+        }
         
         guard let params = parameters else { return request }
         
         do {
-            request.httpBody = try JSONEncoder().encode(params)
+            request.httpBody = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+            print(String(data: request.httpBody!, encoding: .utf8)!)
         } catch let encodeError as NSError {
             print("Encoder error: \(encodeError.localizedDescription)\n")
         }

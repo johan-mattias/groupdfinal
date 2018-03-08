@@ -17,7 +17,7 @@
 		ABD51D352038585A00DA67A4 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD51D342038585A00DA67A4 /* NavigationViewController.swift */; };
 		ABE113F6204AA87000261644 /* BeerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE113F5204AA87000261644 /* BeerRouter.swift */; };
 		ABFAC62D2036E8D800044117 /* BeerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFAC62C2036E8D800044117 /* BeerCell.swift */; };
-		ABFD3DA22045C1EA00F2E674 /* controlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFD3DA12045C1EA00F2E674 /* controlViewController.swift */; };
+		ABFD3DA22045C1EA00F2E674 /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFD3DA12045C1EA00F2E674 /* mainViewController.swift */; };
 		ABFD3DA42045D60000F2E674 /* singleBeerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFD3DA32045D60000F2E674 /* singleBeerViewController.swift */; };
 		D18D9DBAEAACEA60E3851E53 /* Pods_Beerdex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BC4770CE3C19825E27C92E5 /* Pods_Beerdex.framework */; };
 /* End PBXBuildFile section */
@@ -50,7 +50,7 @@
 		ABD51D342038585A00DA67A4 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		ABE113F5204AA87000261644 /* BeerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerRouter.swift; sourceTree = "<group>"; };
 		ABFAC62C2036E8D800044117 /* BeerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BeerCell.swift; path = "/Users/zohrath/Coding/Platform/Platform-spanning/iOS/Beerdex/Beerdex/View/BeerCell.swift"; sourceTree = "<absolute>"; };
-		ABFD3DA12045C1EA00F2E674 /* controlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = controlViewController.swift; sourceTree = "<group>"; };
+		ABFD3DA12045C1EA00F2E674 /* mainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainViewController.swift; sourceTree = "<group>"; };
 		ABFD3DA32045D60000F2E674 /* singleBeerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = singleBeerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,10 +113,10 @@
 		AB6469BF2031B94D001862E8 /* Beerdex */ = {
 			isa = PBXGroup;
 			children = (
-				ABE113FA204AC44B00261644 /* Network */,
-				ABE113F9204AC3DF00261644 /* Controller */,
-				ABE113F8204AC3B900261644 /* View */,
 				ABE113F7204AC39E00261644 /* Model */,
+				ABE113F8204AC3B900261644 /* View */,
+				ABE113F9204AC3DF00261644 /* Controller */,
+				ABE113FA204AC44B00261644 /* Network */,
 				AB6469C02031B94D001862E8 /* AppDelegate.swift */,
 				AB6469C42031B94D001862E8 /* Main.storyboard */,
 				AB6469CA2031B94D001862E8 /* Assets.xcassets */,
@@ -156,7 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				ABFD3DA32045D60000F2E674 /* singleBeerViewController.swift */,
-				ABFD3DA12045C1EA00F2E674 /* controlViewController.swift */,
+				ABFD3DA12045C1EA00F2E674 /* mainViewController.swift */,
 				ABD51D342038585A00DA67A4 /* NavigationViewController.swift */,
 			);
 			path = Controller;
@@ -335,7 +335,7 @@
 				ABE113F6204AA87000261644 /* BeerRouter.swift in Sources */,
 				ABFAC62D2036E8D800044117 /* BeerCell.swift in Sources */,
 				AB6469C92031B94D001862E8 /* Beerdex.xcdatamodeld in Sources */,
-				ABFD3DA22045C1EA00F2E674 /* controlViewController.swift in Sources */,
+				ABFD3DA22045C1EA00F2E674 /* mainViewController.swift in Sources */,
 				AB6469C12031B94D001862E8 /* AppDelegate.swift in Sources */,
 				AB226AEA2031BE830012BFE6 /* Beer.swift in Sources */,
 			);

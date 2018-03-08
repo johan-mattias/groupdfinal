@@ -8,35 +8,17 @@
 
 import UIKit
 
-class singleBeerViewController: UIViewController {
+class singleBeerViewController: UIViewController, UITextViewDelegate {
 
-    var singleImage = UIImage()
     @IBOutlet weak var beerImage: UIImageView!
+    @IBOutlet weak var beerDescription: UILabel!
     
-    @IBOutlet weak var beerDescription: UITextView!
-    
-    
+    var singleImage = UIImage()
+    var descriptionText = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.beerImage.image = singleImage
-        // Do any additional setup after loading the view.
+        beerDescription.text = descriptionText
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
