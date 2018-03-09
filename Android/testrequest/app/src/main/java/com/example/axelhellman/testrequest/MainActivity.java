@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -72,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
         btnUpload = findViewById(R.id.button_upload);
         text_description = findViewById( R.id.textfield_description );
         dropdown_beerselect = findViewById( R.id.dropdown_beerselect );
+        //Limiting text input to 250 just to make sure we are not sending too long strings..
+        text_description.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(250) });
 
         //The drop down for beers
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, beer);
