@@ -11,12 +11,13 @@ resolve = require('path').resolve;
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      console.log(file);
+    
       cb(null, imagePath)
     },
     filename: function (req, file, cb) {
-      console.log(file);
-      cb(null, idgen(16)+'.'+mime.extension(file.mimetype));
+    
+    //   cb(null, idgen(16)+'.'+mime.extension(file.mimetype));
+    cb(null, idgen(16)+'.jpeg');
     }
   })
 var upload = multer({ storage: storage });
@@ -29,10 +30,6 @@ router.post('/upload', upload.single('image'), function(req, res){
     var userID = post.userID;
     var description = post.description;
     
-    console.log(beerID);
-    console.log(userID);
-    console.log(description);
-    console.log(req.file);
     
 
 
@@ -56,8 +53,9 @@ router.post('/upload', upload.single('image'), function(req, res){
         if(err){
             console.log("Something went wrong with thumb!");
             console.log(err);
+            res.status(400).send("Image wasnt uploaded, problem when creating thumbnail");
+            return
         }else{
-        console.log('Thumb done!');
         }
       });
 
