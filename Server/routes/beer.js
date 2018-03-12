@@ -7,7 +7,7 @@ var db = require('../db');
 router.get('/', function(req, res, next) {
 	db.query('SELECT * from beers', function (error, results, fields) {
 		if (error) throw error;
-		res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+		res.send(results);
 	});
 });
 
