@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">testrequest</string>
+    <string name="textfield_description">Enter a description</string>
 </resources>
