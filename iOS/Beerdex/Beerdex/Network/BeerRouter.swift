@@ -11,6 +11,7 @@ import Foundation
 public enum BeerRouter {
     
     case getAll
+    case getBeerTypes
     
     static let baseURLString = "http://188.166.170.111:8080"
     
@@ -18,6 +19,7 @@ public enum BeerRouter {
         
         switch self {
             case .getAll: return "POST"
+            case .getBeerTypes: return "GET"
         }
     }
     
@@ -28,6 +30,7 @@ public enum BeerRouter {
         
             switch self {
                 case .getAll: relativePath = "stream"
+                case .getBeerTypes: relativePath = "beer"
             }
             
             var url = URL(string: BeerRouter.baseURLString)!
@@ -39,13 +42,15 @@ public enum BeerRouter {
         
         let parameters: [String : String]? = {
             switch self {
-                case .getAll: return ["lastImageID":"0"]
+                case .getAll: return ["lastImageID":"40"]
+            case .getBeerTypes: return nil
             }
         }()
         
         let contentType: [String : String]? = {
             switch self {
                 case .getAll: return ["content-type" : "application/json"]
+                case .getBeerTypes: return ["content-type" : "application/json"]
             }
             
         }()

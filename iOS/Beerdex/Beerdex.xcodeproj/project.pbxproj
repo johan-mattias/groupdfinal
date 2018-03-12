@@ -15,7 +15,9 @@
 		AB6469CE2031B94D001862E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB6469CC2031B94D001862E8 /* LaunchScreen.storyboard */; };
 		AB6469D92031B94E001862E8 /* BeerdexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6469D82031B94E001862E8 /* BeerdexTests.swift */; };
 		ABD51D352038585A00DA67A4 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD51D342038585A00DA67A4 /* NavigationViewController.swift */; };
+		ABDEF9F12056E3DE006D03F1 /* BeerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDEF9F02056E3DE006D03F1 /* BeerType.swift */; };
 		ABE113F6204AA87000261644 /* BeerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE113F5204AA87000261644 /* BeerRouter.swift */; };
+		ABEE74222056C49100FD0B32 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEE74212056C49100FD0B32 /* UploadViewController.swift */; };
 		ABFAC62D2036E8D800044117 /* BeerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFAC62C2036E8D800044117 /* BeerCell.swift */; };
 		ABFD3DA22045C1EA00F2E674 /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFD3DA12045C1EA00F2E674 /* mainViewController.swift */; };
 		ABFD3DA42045D60000F2E674 /* singleBeerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFD3DA32045D60000F2E674 /* singleBeerViewController.swift */; };
@@ -48,7 +50,9 @@
 		AB6469D82031B94E001862E8 /* BeerdexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerdexTests.swift; sourceTree = "<group>"; };
 		AB6469DA2031B94E001862E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABD51D342038585A00DA67A4 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		ABDEF9F02056E3DE006D03F1 /* BeerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerType.swift; sourceTree = "<group>"; };
 		ABE113F5204AA87000261644 /* BeerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerRouter.swift; sourceTree = "<group>"; };
+		ABEE74212056C49100FD0B32 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		ABFAC62C2036E8D800044117 /* BeerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BeerCell.swift; path = "/Users/zohrath/Coding/Platform/Platform-spanning/iOS/Beerdex/Beerdex/View/BeerCell.swift"; sourceTree = "<absolute>"; };
 		ABFD3DA12045C1EA00F2E674 /* mainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainViewController.swift; sourceTree = "<group>"; };
 		ABFD3DA32045D60000F2E674 /* singleBeerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = singleBeerViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				AB226AE92031BE830012BFE6 /* Beer.swift */,
+				ABDEF9F02056E3DE006D03F1 /* BeerType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 				ABFD3DA32045D60000F2E674 /* singleBeerViewController.swift */,
 				ABFD3DA12045C1EA00F2E674 /* mainViewController.swift */,
 				ABD51D342038585A00DA67A4 /* NavigationViewController.swift */,
+				ABEE74212056C49100FD0B32 /* UploadViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -333,7 +339,9 @@
 				ABFD3DA42045D60000F2E674 /* singleBeerViewController.swift in Sources */,
 				ABD51D352038585A00DA67A4 /* NavigationViewController.swift in Sources */,
 				ABE113F6204AA87000261644 /* BeerRouter.swift in Sources */,
+				ABDEF9F12056E3DE006D03F1 /* BeerType.swift in Sources */,
 				ABFAC62D2036E8D800044117 /* BeerCell.swift in Sources */,
+				ABEE74222056C49100FD0B32 /* UploadViewController.swift in Sources */,
 				AB6469C92031B94D001862E8 /* Beerdex.xcdatamodeld in Sources */,
 				ABFD3DA22045C1EA00F2E674 /* mainViewController.swift in Sources */,
 				AB6469C12031B94D001862E8 /* AppDelegate.swift in Sources */,
