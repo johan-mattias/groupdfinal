@@ -53,7 +53,7 @@ public class UploadActivity extends AppCompatActivity {
     private Button btnChoose, btnUpload;
     private EditText text_description;
     private Spinner dropdown_beerselect;
-    public static String URL = "http://188.166.170.111:8080/image/upload"; //Add ip to our server
+    public static String URL = "http://188.166.170.111:8080/image/upload"; //Link to to upload node.
     static final int PICK_IMAGE_REQUEST = 1;
     String filePath;
     String description;
@@ -95,6 +95,7 @@ public class UploadActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "filepath: " + filePath, Toast.LENGTH_LONG).show();
                     description = text_description.getText().toString();
                     selected_Beer = String.valueOf(dropdown_beerselect.getSelectedItemPosition() + 1);
+                    Log.i("UploadActivity", filePath);
                     imageUpload(filePath);
                 } else {
                     Toast.makeText(getApplicationContext(), "No image selected!", Toast.LENGTH_LONG).show();
@@ -156,6 +157,7 @@ public class UploadActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+        Log.i("UploadActivity", "Asking for permission to read.");
         // ACTUALLY GRANT THE APP TO GET PERMISSION TO ACSESS FILE
         if (ContextCompat.checkSelfPermission(UploadActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -164,6 +166,8 @@ public class UploadActivity extends AppCompatActivity {
             //requestReadPermission();
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 200);
         }
+        Log.i("UploadActivity", "Reading is APPROVED.");
+        Log.i("UploadActivity", "Asking for permission to write.");
         // ACTUALLY GRANT THE APP TO GET PERMISSION TO ACSESS FILE
         if (ContextCompat.checkSelfPermission(UploadActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -172,7 +176,7 @@ public class UploadActivity extends AppCompatActivity {
             //requestWritePermission();
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 200);
         }
-
+        Log.i("UploadActivity", "Writing is APPROVED.");
 
         //since no login is implemented we cannot actually tell the id
         //Adds param userID
@@ -184,6 +188,7 @@ public class UploadActivity extends AppCompatActivity {
         smr.addStringParam("mimetype", "image/jpeg");
         smr.addStringParam("description", "" + description);
         smr.addFile("image", imagePath);
+        Log.i("imageUpload", imagePath);
         UploadImage.getInstance().addToRequestQueue(smr);
 
 

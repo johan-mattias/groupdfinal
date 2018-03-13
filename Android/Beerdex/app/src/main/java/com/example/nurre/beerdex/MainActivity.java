@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         mAdapter = new BeerImageAdapter(MainActivity.this, beerImages);
-        final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        final LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
@@ -57,15 +57,20 @@ public class MainActivity extends AppCompatActivity {
                 uploadImage();
             }
         });
-
-        fetchBeerImages(0);
+        int loadDataVariable = 0;
+        fetchBeerImages(loadDataVariable);
         //fetchBeerImages_false();
-        /*recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if(mLayoutManager.findLastCompletely)
+
+                if(mLayoutManager.findLastCompletelyVisibleItemPosition() == beerImages.size()-1){
+                    fetchBeerImages(20);
+                }
             }
-        });*/
+        });
 
     }
 
