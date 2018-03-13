@@ -17,10 +17,11 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/media_image"
+                android:id="@+id/beer_image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 app:layout_constraintDimensionRatio="H,16:10"
                 app:layout_constraintTop_toTopOf="parent"
