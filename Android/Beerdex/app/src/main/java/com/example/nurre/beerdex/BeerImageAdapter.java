@@ -2,14 +2,13 @@ package com.example.nurre.beerdex;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -30,7 +29,7 @@ public class BeerImageAdapter extends RecyclerView.Adapter<BeerImageAdapter.Beer
 
         public BeerCardView(View view){
             super(view);
-            image = (ImageView) view.findViewById(R.id.media_image);
+            image = (ImageView) view.findViewById(R.id.beer_image);
             title = (TextView) view.findViewById(R.id.primary_text);
             user_name = (TextView) view.findViewById(R.id.sub_text);
         }
@@ -55,12 +54,13 @@ public class BeerImageAdapter extends RecyclerView.Adapter<BeerImageAdapter.Beer
         final BeerImage beerimage = beerImages.get(position);
 
         Picasso.with(mContext).load(download_URL + beerimage.getLink()).into(holder.image);
-        holder.title.setText(beerimage.getDescription());
+        holder.title.setText(beerimage.getBeerName());
         holder.user_name.setText(beerimage.getUserName());
 
         holder.image.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-                showBeerImage(beerimage);
+                Log.i("Bruv idk ################", "OnClick reached");
+                showBeerImage(view, beerimage);
             }
         });
 
@@ -71,8 +71,12 @@ public class BeerImageAdapter extends RecyclerView.Adapter<BeerImageAdapter.Beer
         return beerImages.size();
     }
 
-        private void showBeerImage(BeerImage image){
-            Toast.makeText(mContext, "You pressed the image made by: " + image.getUserName(), Toast.LENGTH_LONG);
+    private void showBeerImage(View view, BeerImage image){
+        Log.i("Bruv idk ################", "showBeerImage reached");
+        //Toast.makeText(mContext, "You pressed the image made by: " + image.getUserName(), Toast.LENGTH_LONG);
+        Intent showImage = new Intent(view.getContext(), ImageViewer.class);
+        showImage.putExtra("beerImage", (BeerImage) image);
+        view.getContext().startActivity(showImage);
 
-        }
+    }
 }

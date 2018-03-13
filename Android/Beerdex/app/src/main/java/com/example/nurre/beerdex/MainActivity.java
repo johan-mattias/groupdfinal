@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
                 uploadImage();
             }
         });
-        int loadDataVariable = 0;
-        fetchBeerImages(loadDataVariable);
+
+        fetchBeerImages(0);
         //fetchBeerImages_false();
 
 
@@ -67,35 +67,14 @@ public class MainActivity extends AppCompatActivity {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 
                 if(mLayoutManager.findLastCompletelyVisibleItemPosition() == beerImages.size()-1){
-                    fetchBeerImages(20);
+                    fetchBeerImages(beerImages.size());
                 }
             }
         });
 
     }
 
-    private void fetchBeerImages_false(){
-        BeerImage beerImage = new BeerImage("author#1", "Example pictures");
-        beerImages.add(beerImage);
 
-        beerImage = new BeerImage("author#2", "Example pictures");
-        beerImages.add(beerImage);
-
-        beerImage = new BeerImage("author#3", "Example pictures");
-        beerImages.add(beerImage);
-
-        beerImage = new BeerImage("author#3", "Example pictures");
-        beerImages.add(beerImage);
-
-        beerImage = new BeerImage("author#4", "Example pictures");
-        beerImages.add(beerImage);
-
-        beerImage = new BeerImage("author#5", "Example pictures");
-        beerImages.add(beerImage);
-
-        beerImage = new BeerImage("author#6", "Example pictures");
-        beerImages.add(beerImage);
-    }
 
     public void uploadImage(){
         Intent upload = (Intent) new Intent(this, UploadActivity.class);
