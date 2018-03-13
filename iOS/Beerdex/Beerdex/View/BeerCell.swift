@@ -20,8 +20,11 @@ class BeerCell: UICollectionViewCell {
     @IBOutlet weak var textField: UITextField!
     
     func configure() {
-        
-        self.textField.text = beer?.link
+        self.layer.cornerRadius = 10.0
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = UIColor.clear.cgColor
+        self.layer.masksToBounds = true
+        self.textField.text = beer?.description
         self.backgroundColor = .white
         getImageForCell()
     }

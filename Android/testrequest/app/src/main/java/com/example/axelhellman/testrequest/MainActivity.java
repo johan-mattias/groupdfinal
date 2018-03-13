@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
             smr.addStringParam("userID", "1");
             //Adds param beerID with value from dropdown
             smr.addStringParam("beerID", "" + selected_Beer);
-            //Do we really need to send this? 
+            //Do we really need to send this?
             smr.addStringParam("imagename", "nurre.jpeg");
             smr.addStringParam("mimetype", "image/jpeg");
             smr.addStringParam( "description", "" + description );

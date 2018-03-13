@@ -13,35 +13,59 @@ private let reuseIdentifier = "BeerCell"
 
 class mainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    typealias imageMetaData = (Data?) -> ()
+    typealias metaData = (Data?) -> ()
     
     @IBOutlet weak var collection: UICollectionView!
     
     @IBAction func pressedSelectImageButton(_ sender: UIButton) {
-        openImageLib()
+//        openImageLib()
     }
     
+    private var gradientLayer: CAGradientLayer!
     private var selectedImage: UIImageView?
     private var selectedDescription: String?
     private var downloadedImages = 0
+    private var beerTypes: [BeerType]?
     private var beersArray: [Beer]? {
         didSet {
             print("Set beer array")
+            print(beersArray?.count)
             DispatchQueue.main.async {
                 self.collection.reloadData()
             }
         }
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         getDataFromServer()
+        getBeerTypes()
     }
 
     func setupView() {
         self.view.backgroundColor = .white
-        collection.backgroundColor = .white
+        collection.layer.cornerRadius = 20.0
+    }
+    
+    func getBeerTypes() {
+        downloadBeerTypes() { data in
+            guard let data = data else {
+                print ("Downloading beer types failed")
+                return
+            }
+            do {
+                let type = try JSONDecoder().decode([BeerType].self, from: data)
+                self.beerTypes = type
+            } catch let jsonError {
+                print ("Error decoding: \(jsonError)")
+            }
+        }
     }
 
     func getDataFromServer() {
@@ -53,17 +77,37 @@ class mainViewController: UIViewController, UICollectionViewDataSource, UICollec
             do {
                 let beer = try JSONDecoder().decode([Beer].self, from: data)
                 self.beersArray = beer
-            } catch let jsonerr {
-                print("Error: \(jsonerr)")
+            } catch let jsonError {
+                print("Error: \(jsonError)")
             }
         }
     }
     
-    func downloadBeerMetaData(with completionHandler: @escaping imageMetaData ) {
+    func downloadBeerTypes(with completionHandler: @escaping metaData) {
         
-        let urlRequest = BeerRouter.getAll.asURLRequest()
+        let beerTypeRequest = BeerRouter.getBeerTypes.asURLRequest()
         
-        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+        let session = URLSession(configuration: .default)
+        
+        let beerTypeTask = session.dataTask(with: beerTypeRequest) { (data, response, error) in
+            if let error = error {
+                print(error)
+            }
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                completionHandler(data)
+            }
+        }
+        beerTypeTask.resume()
+    }
+    
+    func downloadBeerMetaData(with completionHandler: @escaping metaData ) {
+        
+        let imageUrlRequest = BeerRouter.getAll.asURLRequest()
+        
+        let imageTask = URLSession.shared.dataTask(with: imageUrlRequest) { (data, response, error) in
 
             if let error = error {
                 print(error)
@@ -75,50 +119,20 @@ class mainViewController: UIViewController, UICollectionViewDataSource, UICollec
                 completionHandler(data)
             }
         }
-        task.resume()
+        imageTask.resume()
     }
     
-    func uploadBeerData(image: UIImage) {
-        let url = "http://188.166.170.111:8080/image/upload"
-        let imageData = UIImageJPEGRepresentation(image, 1.0)!
-        let parameters = ["beerID":"1", "userID":"1", "description":"ANYTHING!"]
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                multipartFormData.append(imageData, withName: "image", fileName: "impstout.jpeg", mimeType: "image/jpeg")
-                for (key, val) in parameters {
-                    multipartFormData.append(val.data(using: String.Encoding.utf8)!, withName: key)
-                }
-        },
-            to: url,
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.responseString { response in
-                        debugPrint(response)
-                    }
-                case .failure(let encodingError):
-                    print(encodingError)
-                }
-        })
-    }
-    
-    func openImageLib() {
-        let controller = UIImagePickerController()
-        controller.delegate = self
-        controller.sourceType = .photoLibrary
-        
-        present(controller, animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        uploadBeerData(image: image)
-        dismiss(animated: true, completion: nil)
-    }
+//    func createGradientLayer() {
+//        gradientLayer = CAGradientLayer()
+//        gradientLayer.frame = self.view.bounds
+//        gradientLayer.zPosition = -1
+//        gradientLayer.locations = [0.8, 1.0]
+//        let lightBlue = UIColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 0.3)
+//        gradientLayer.colors = [UIColor.white.cgColor, lightBlue.cgColor]
+//
+//        self.view.layer.addSublayer(gradientLayer)
+//
+//    }
     
    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -155,7 +169,11 @@ class mainViewController: UIViewController, UICollectionViewDataSource, UICollec
             dest.singleImage = (self.selectedImage?.image)!
             dest.descriptionText = self.selectedDescription!
         }
+        
+        if segue.identifier == "uploadSegue" {
+            let dest = segue.destination as! UploadViewController
+            guard let types = self.beerTypes else { return }
+            dest.beerTypes = types
+        }
     }
-    
-
 }
