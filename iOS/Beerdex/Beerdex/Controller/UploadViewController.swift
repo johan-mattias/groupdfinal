@@ -13,6 +13,9 @@ class UploadViewController: UIViewController, UIPickerViewDelegate, UIPickerView
    
     @IBOutlet weak var descriptionView: UITextView!
     @IBOutlet weak var beerTypeField: UITextField!
+    @IBOutlet weak var uploadIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var uploadFinishedIndicator: UILabel!
+    
     
     @IBAction func selectImageButtonPressed(_ sender: Any) {
         openImageLib()
@@ -32,6 +35,8 @@ class UploadViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         pickerView.delegate = self
         pickerView.dataSource = self
         beerTypeField.inputView = pickerView
+        uploadIndicator.hidesWhenStopped = true
+        uploadFinishedIndicator.isHidden = true
     }
     
     func openImageLib() {
@@ -66,7 +71,7 @@ class UploadViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
         
         let parameters = ["beerID":beerID, "userID":"1", "description":description]
-        
+        uploadIndicator.startAnimating()
         Alamofire.upload(
             multipartFormData: { multipartFormData in
                 multipartFormData.append(imageData, withName: "image", fileName: "impstout.jpeg", mimeType: "image/jpeg")
@@ -80,7 +85,9 @@ class UploadViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 case .success(let upload, _, _):
                     upload.responseString { response in
                         debugPrint(response)
-                        // TODO: Present alert that image has been uploaded
+                        self.uploadIndicator.stopAnimating()
+                        self.uploadFinishedIndicator.isHidden = false
+                        self.uploadFinishedIndicator.text = "Upload finished!"
                     }
                 case .failure(let encodingError):
                     print(encodingError)

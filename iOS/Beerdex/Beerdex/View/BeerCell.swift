@@ -48,9 +48,9 @@ class BeerCell: UICollectionViewCell {
                 print(error)
                 return
             }
-            guard let imageToCache = UIImage(data: data!) else { return }
+            
             DispatchQueue.main.async {
-                
+                guard let imageToCache = UIImage(data: data!) else { return }
                 
                 if imageUrlString == url {
                     self.imageTitle.image = imageToCache
