@@ -26,6 +26,7 @@ class BeerCell: UICollectionViewCell {
         self.layer.masksToBounds = true
         self.textField.text = beer?.description
         self.backgroundColor = .white
+        self.imageTitle.image = nil
         getImageForCell()
     }
     

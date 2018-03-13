@@ -17,40 +17,35 @@ class mainViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     @IBOutlet weak var collection: UICollectionView!
     
-    @IBAction func pressedSelectImageButton(_ sender: UIButton) {
-//        openImageLib()
+    @IBAction func reloadCollectionViewPressed(_ sender: UIButton) {
+        imageDownloadIndex = 0
+        getDataFromServer()
     }
     
     private var gradientLayer: CAGradientLayer!
     private var selectedImage: UIImageView?
     private var selectedDescription: String?
-    private var downloadedImages = 0
+    private var imageDownloadIndex = 0
     private var beerTypes: [BeerType]?
     private var beersArray: [Beer]? {
         didSet {
-            print("Set beer array")
-            print(beersArray?.count)
             DispatchQueue.main.async {
                 self.collection.reloadData()
             }
         }
     }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        getDataFromServer()
-        getBeerTypes()
+        
     }
 
     func setupView() {
         self.view.backgroundColor = .white
         collection.layer.cornerRadius = 20.0
+        getDataFromServer()
+        getBeerTypes()
     }
     
     func getBeerTypes() {
@@ -76,7 +71,12 @@ class mainViewController: UIViewController, UICollectionViewDataSource, UICollec
             }
             do {
                 let beer = try JSONDecoder().decode([Beer].self, from: data)
-                self.beersArray = beer
+                if self.beersArray != nil {
+                    self.beersArray?.append(contentsOf: beer)
+                } else {
+                    self.beersArray = beer
+                }
+                
             } catch let jsonError {
                 print("Error: \(jsonError)")
             }
@@ -105,7 +105,7 @@ class mainViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func downloadBeerMetaData(with completionHandler: @escaping metaData ) {
         
-        let imageUrlRequest = BeerRouter.getAll.asURLRequest()
+        let imageUrlRequest = BeerRouter.getAll.asURLRequest(from: imageDownloadIndex)
         
         let imageTask = URLSession.shared.dataTask(with: imageUrlRequest) { (data, response, error) in
 
@@ -122,19 +122,7 @@ class mainViewController: UIViewController, UICollectionViewDataSource, UICollec
         imageTask.resume()
     }
     
-//    func createGradientLayer() {
-//        gradientLayer = CAGradientLayer()
-//        gradientLayer.frame = self.view.bounds
-//        gradientLayer.zPosition = -1
-//        gradientLayer.locations = [0.8, 1.0]
-//        let lightBlue = UIColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 0.3)
-//        gradientLayer.colors = [UIColor.white.cgColor, lightBlue.cgColor]
-//
-//        self.view.layer.addSublayer(gradientLayer)
-//
-//    }
-    
-   func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
@@ -159,6 +147,19 @@ class mainViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.selectedDescription = description
         
         performSegue(withIdentifier: "showSingleBeer", sender: Any?.self)
+    }
+    
+    func insertion(count: Int) {
+        collection.insertItems(at: [IndexPath(row: count - 1, section: 0)])
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let count = beersArray?.count else { return }
+        
+        if indexPath.item == count - 1 {
+            imageDownloadIndex += 20
+            getDataFromServer()
+        }
     }
     
     // MARK: - Navigation

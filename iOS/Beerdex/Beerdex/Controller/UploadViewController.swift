@@ -13,15 +13,19 @@ class UploadViewController: UIViewController, UIPickerViewDelegate, UIPickerView
    
     @IBOutlet weak var descriptionView: UITextView!
     @IBOutlet weak var beerTypeField: UITextField!
+    @IBOutlet weak var uploadIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var uploadFinishedIndicator: UILabel!
+    
     
     @IBAction func selectImageButtonPressed(_ sender: Any) {
         openImageLib()
     }
     
     @IBAction func selectCameraButtonPressed(_ sender: Any) {
+        
     }
-    
-    
+    // TODO: Remove when beer types exist on server
+    let types = ["Lager", "Ale", "IPA", "Stout", "Weiss"]
     let pickerView = UIPickerView()
     var beerTypes = [BeerType]()
     
@@ -31,6 +35,8 @@ class UploadViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         pickerView.delegate = self
         pickerView.dataSource = self
         beerTypeField.inputView = pickerView
+        uploadIndicator.hidesWhenStopped = true
+        uploadFinishedIndicator.isHidden = true
     }
     
     func openImageLib() {
@@ -51,12 +57,21 @@ class UploadViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         dismiss(animated: true, completion: nil)
     }
     
-    // TODO: No hardcoded information
     func uploadBeerData(image: UIImage) {
         let url = "http://188.166.170.111:8080/image/upload"
         let imageData = UIImageJPEGRepresentation(image, 1.0)!
-        let parameters = ["beerID":"1", "userID":"1", "description":"The very greatest"]
         
+        var description = ""
+        if let de = descriptionView.text {
+            description = de
+        }
+        var beerID = ""
+        if let beer = beerTypeField.text {
+            beerID = beer
+        }
+        
+        let parameters = ["beerID":beerID, "userID":"1", "description":description]
+        uploadIndicator.startAnimating()
         Alamofire.upload(
             multipartFormData: { multipartFormData in
                 multipartFormData.append(imageData, withName: "image", fileName: "impstout.jpeg", mimeType: "image/jpeg")
@@ -70,7 +85,9 @@ class UploadViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 case .success(let upload, _, _):
                     upload.responseString { response in
                         debugPrint(response)
-                        // TODO: Present alert that image has been uploaded
+                        self.uploadIndicator.stopAnimating()
+                        self.uploadFinishedIndicator.isHidden = false
+                        self.uploadFinishedIndicator.text = "Upload finished!"
                     }
                 case .failure(let encodingError):
                     print(encodingError)
@@ -83,15 +100,16 @@ class UploadViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return beerTypes.count
+        return types.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return beerTypes[row].Name
+        return types[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        beerTypeField.text = beerTypes[row].Name
+        
+        beerTypeField.text = types[row]
         beerTypeField.resignFirstResponder()
     }
 }

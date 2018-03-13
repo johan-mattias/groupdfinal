@@ -15,3 +15,16 @@ class BeerType: Codable {
     let breweryID: Int
     let countryID: Int
 }
+
+public enum BeerList {
+    case Lager
+    
+    var id: Int {
+        switch self {
+            case .Lager: return 1
+        }
+        
+        
+        
+    }
+}
