@@ -23,6 +23,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ImageActivity"></activity>
+        <activity android:name=".UploadActivity"
+            android:parentActivityName=".MainActivity">
+
+        </activity>
     </application>
 
 </manifest>

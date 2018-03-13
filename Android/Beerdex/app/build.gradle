@@ -29,4 +29,5 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:26.0.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'dev.dworks.libs:volleyplus:+'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 }
