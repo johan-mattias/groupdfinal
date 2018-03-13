@@ -19,9 +19,10 @@ class UploadViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     @IBAction func selectCameraButtonPressed(_ sender: Any) {
+        
     }
-    
-    
+    // TODO: Remove when beer types exist on server
+    let types = ["Lager", "Ale", "IPA", "Stout", "Weiss"]
     let pickerView = UIPickerView()
     var beerTypes = [BeerType]()
     
@@ -51,11 +52,20 @@ class UploadViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         dismiss(animated: true, completion: nil)
     }
     
-    // TODO: No hardcoded information
     func uploadBeerData(image: UIImage) {
         let url = "http://188.166.170.111:8080/image/upload"
         let imageData = UIImageJPEGRepresentation(image, 1.0)!
-        let parameters = ["beerID":"1", "userID":"1", "description":"The very greatest"]
+        
+        var description = ""
+        if let de = descriptionView.text {
+            description = de
+        }
+        var beerID = ""
+        if let beer = beerTypeField.text {
+            beerID = beer
+        }
+        
+        let parameters = ["beerID":beerID, "userID":"1", "description":description]
         
         Alamofire.upload(
             multipartFormData: { multipartFormData in
@@ -83,15 +93,16 @@ class UploadViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return beerTypes.count
+        return types.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return beerTypes[row].Name
+        return types[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        beerTypeField.text = beerTypes[row].Name
+        
+        beerTypeField.text = types[row]
         beerTypeField.resignFirstResponder()
     }
 }

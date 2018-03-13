@@ -23,7 +23,7 @@ public enum BeerRouter {
         }
     }
     
-    public func asURLRequest() -> URLRequest {
+    public func asURLRequest(from index: Int = 0) -> URLRequest {
         
         let url: URL = {
             let relativePath: String?
@@ -42,15 +42,14 @@ public enum BeerRouter {
         
         let parameters: [String : String]? = {
             switch self {
-                case .getAll: return ["lastImageID":"40"]
-            case .getBeerTypes: return nil
+                case .getAll: return ["lastImageID":"\(index)"]
+                case .getBeerTypes: return nil
             }
         }()
         
         let contentType: [String : String]? = {
             switch self {
-                case .getAll: return ["content-type" : "application/json"]
-                case .getBeerTypes: return ["content-type" : "application/json"]
+                default: return ["content-type" : "application/json"]
             }
             
         }()

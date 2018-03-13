@@ -26,6 +26,7 @@ class BeerCell: UICollectionViewCell {
         self.layer.masksToBounds = true
         self.textField.text = beer?.description
         self.backgroundColor = .white
+        self.imageTitle.image = nil
         getImageForCell()
     }
     
@@ -47,9 +48,9 @@ class BeerCell: UICollectionViewCell {
                 print(error)
                 return
             }
-            
+            guard let imageToCache = UIImage(data: data!) else { return }
             DispatchQueue.main.async {
-                guard let imageToCache = UIImage(data: data!) else { return }
+                
                 
                 if imageUrlString == url {
                     self.imageTitle.image = imageToCache
