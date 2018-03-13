@@ -9,17 +9,21 @@ var thumb = require('node-thumbnail').thumb;
 var imagePath = 'public/images/uploaded_images/';
 resolve = require('path').resolve;
 
+/****************************************************/
+/*          CODE TO SHOW SERVER #1                  */
+/****************************************************/
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
     
-      cb(null, imagePath)
+    cb(null, imagePath)
     },
     filename: function (req, file, cb) {
     
     //   cb(null, idgen(16)+'.'+mime.extension(file.mimetype));
     cb(null, idgen(16)+'.jpeg');
     }
-  })
+})
 var upload = multer({ storage: storage });
 
 

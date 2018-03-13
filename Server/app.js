@@ -9,15 +9,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-// Routes
-var index = require('./routes/index');
-var users = require('./routes/users');
-var test = require('./routes/test');
-var stream = require('./routes/stream');
-var db = require('./db');
-var beer = require('./routes/beer');
-var image = require('./routes/image');
-var comment = require('./routes/comment');
+
 
 //SSL cert and https
 var fs = require('fs');
@@ -44,10 +36,25 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+/*************************************/
+/*      CODE TO SHOW SERVER #2       */
+/*************************************/
+
 app.use('/getImage', express.static(__dirname + '/public/images/uploaded_images'));
 app.use('/robots.txt', express.static(__dirname + '/robots.txt'));
 
+// Routes
+var index = require('./routes/index');
+var users = require('./routes/users');
+var test = require('./routes/test');
+var stream = require('./routes/stream');
+var db = require('./db');
+var beer = require('./routes/beer');
+var image = require('./routes/image');
+var comment = require('./routes/comment');
 
+//Endpoints
 app.use('/', index);
 app.use('/users', users);
 app.use('/test', test);
