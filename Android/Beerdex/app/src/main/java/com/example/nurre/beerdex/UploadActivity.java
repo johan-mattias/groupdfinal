@@ -69,10 +69,10 @@ public class UploadActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageView);
         btnChoose = findViewById(R.id.button_choose);
         btnUpload = findViewById(R.id.button_upload);
-        text_description = findViewById( R.id.textfield_description );
-        dropdown_beerselect = findViewById( R.id.dropdown_beerselect);
+        text_description = findViewById(R.id.textfield_description);
+        dropdown_beerselect = findViewById(R.id.dropdown_beerselect);
         //Limiting text input to 250 just to make sure we are not sending too long strings..
-        text_description.setFilters(new InputFilter[]{ new InputFilter.LengthFilter(250) });
+        text_description.setFilters(new InputFilter[]{new InputFilter.LengthFilter(250)});
 
         //The drop down for beers
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, beer);
@@ -92,12 +92,11 @@ public class UploadActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (filePath != null) {
-                    Toast.makeText(getApplicationContext(), "filepath: "+filePath, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "filepath: " + filePath, Toast.LENGTH_LONG).show();
                     description = text_description.getText().toString();
-                    selected_Beer = String.valueOf( dropdown_beerselect.getSelectedItemPosition()+1);
+                    selected_Beer = String.valueOf(dropdown_beerselect.getSelectedItemPosition() + 1);
                     imageUpload(filePath);
-                }
-                else{
+                } else {
                     Toast.makeText(getApplicationContext(), "No image selected!", Toast.LENGTH_LONG).show();
 
                 }
@@ -107,7 +106,7 @@ public class UploadActivity extends AppCompatActivity {
 
     //Browse the image in app
     private void imageBrowse() {
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         // Start the Intent
         startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
     }
@@ -117,7 +116,7 @@ public class UploadActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK) {
 
-            if(requestCode == PICK_IMAGE_REQUEST){
+            if (requestCode == PICK_IMAGE_REQUEST) {
                 Uri picUri = data.getData();
 
                 filePath = getPath(picUri);
@@ -135,23 +134,23 @@ public class UploadActivity extends AppCompatActivity {
     private void imageUpload(final String imagePath) {
         //A Simple request for making a Multi Part request whose response is retrieve as String
         SimpleMultiPartRequest smr = new SimpleMultiPartRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.d("Response from server:", response);
-                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
-                        try {
-                            JSONObject jObj = new JSONObject(response);
-                            String message = jObj.getString("first message");
+            @Override
+            public void onResponse(String response) {
+                Log.d("Response from server:", response);
+                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    String message = jObj.getString("first message");
 
-                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
-                        } catch (JSONException e) {
-                            // JSON error
-                            e.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }, new Response.ErrorListener() {
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
@@ -175,18 +174,17 @@ public class UploadActivity extends AppCompatActivity {
         }
 
 
-
-            //since no login is implemented we cannot actually tell the id
-            //Adds param userID
-            smr.addStringParam("userID", "1");
-            //Adds param beerID with value from dropdown
-            smr.addStringParam("beerID", "" + selected_Beer);
-            //Do we really need to send this? 
-            smr.addStringParam("imagename", "nurre.jpeg");
-            smr.addStringParam("mimetype", "image/jpeg");
-            smr.addStringParam( "description", "" + description );
-            smr.addFile("image", imagePath);
-            UploadImage.getInstance().addToRequestQueue(smr);
+        //since no login is implemented we cannot actually tell the id
+        //Adds param userID
+        smr.addStringParam("userID", "1");
+        //Adds param beerID with value from dropdown
+        smr.addStringParam("beerID", "" + selected_Beer);
+        //Do we really need to send this?
+        smr.addStringParam("imagename", "nurre.jpeg");
+        smr.addStringParam("mimetype", "image/jpeg");
+        smr.addStringParam("description", "" + description);
+        smr.addFile("image", imagePath);
+        UploadImage.getInstance().addToRequestQueue(smr);
 
 
         //Toast.makeText(getApplicationContext(), "Enter a description!", Toast.LENGTH_LONG).show();
@@ -196,7 +194,7 @@ public class UploadActivity extends AppCompatActivity {
     }
 
     private String getPath(Uri contentUri) {
-        String[] proj = { MediaStore.Images.Media.DATA };
+        String[] proj = {MediaStore.Images.Media.DATA};
         CursorLoader loader = new CursorLoader(getApplicationContext(), contentUri, proj, null, null, null);
         Cursor cursor = loader.loadInBackground();
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -205,9 +203,4 @@ public class UploadActivity extends AppCompatActivity {
         cursor.close();
         return result;
     }
-
-
-
-
-
 }

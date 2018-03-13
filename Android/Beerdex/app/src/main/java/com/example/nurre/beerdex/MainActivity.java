@@ -2,9 +2,7 @@ package com.example.nurre.beerdex;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -12,15 +10,12 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -55,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(mAdapter);
 
-        Log.i("MainActivity", "Created recyclerview");
         myToolbar.findViewById(R.id.upload).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,10 +57,8 @@ public class MainActivity extends AppCompatActivity {
                 uploadImage();
             }
         });
-        Log.i("MainActivity", "Created onClickListener on backbutton.");
 
         fetchBeerImages(0);
-        Log.i("MainActivity", "fetchBeerImages(0)");
         //fetchBeerImages_false();
         /*recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -123,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
                 try{
                     Response response = client.newCall(request).execute();
                     JSONArray jsonArray = new JSONArray(response.body().string());
-                    Log.i("MainActivity", "Fetched JSON-object");
                     for (int i = 0; i < jsonArray.length(); i++){
                         JSONObject fetchedBeer = jsonArray.getJSONObject(i);
 
@@ -137,9 +128,7 @@ public class MainActivity extends AppCompatActivity {
                                 fetchedBeer.getString("country"),
                                 fetchedBeer.getString("description")
                         );
-                        Log.i("MainActivity", "Downloaded picture with ID = " + fetchedBeer.getInt("image_id"));
                         beerImages.add(newBeerImage);
-                        Log.i("MainActivity", "Added to beerImages.");
                     }
 
 

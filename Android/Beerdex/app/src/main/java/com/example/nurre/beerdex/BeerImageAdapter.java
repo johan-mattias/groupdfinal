@@ -22,6 +22,7 @@ import java.util.List;
 public class BeerImageAdapter extends RecyclerView.Adapter<BeerImageAdapter.BeerCardView> {
     private Context mContext;
     private List<BeerImage> beerImages;
+    public static String download_URL = "http://188.166.170.111:8080/getImage/";
 
     public class BeerCardView extends RecyclerView.ViewHolder {
         public ImageView image;
@@ -53,9 +54,7 @@ public class BeerImageAdapter extends RecyclerView.Adapter<BeerImageAdapter.Beer
     public void onBindViewHolder(BeerCardView holder, int position) {
         final BeerImage beerimage = beerImages.get(position);
 
-        //loadPictureFromURL(beerimage.getLink(), holder.image);
-        //Picasso.with(mContext).load("https://vignette.wikia.nocookie.net/freshprince/images/7/79/Will_Smith.jpg/revision/latest?cb=20141020211734").into(holder.image);
-        Picasso.with(mContext).load("http://188.166.170.111:8080/getImage/XmNuLAQiGBNW32q3.jpeg").into(holder.image);
+        Picasso.with(mContext).load(download_URL + beerimage.getLink()).into(holder.image);
         holder.title.setText(beerimage.getDescription());
         holder.user_name.setText(beerimage.getUserName());
 
